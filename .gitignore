@@ -1,0 +1,11 @@
+/docs/repo-maps/artifacts/
+/docs/RepoMix/artifacts/
+/docs/code-graph/artifacts/
+/docs/screens/
+/target/
+
+# Local environment files and credential directories are never repository inputs.
+.env
+.env.*
+!.env.example
+secrets/
