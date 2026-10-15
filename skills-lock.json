@@ -13,6 +13,12 @@
       "skillPath": "skills/create-design-system/SKILL.md",
       "computedHash": "0c0916611d20ad459de56d28506326e3b4df7e06bda01133e9517d80b8b4a31c"
     },
+    "design-doc-mermaid": {
+      "source": "spillwavesolutions/design-doc-mermaid",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "cee2494adc2d3bdbedbf2a4b1a87c7eda12482c0de1ec690d8c3c19b9a0c3ebc"
+    },
     "legacy-codebase-workflows": {
       "source": "EdukeyTeam/agent-toolbox",
       "sourceType": "github",
