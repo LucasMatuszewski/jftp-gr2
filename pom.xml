@@ -42,7 +42,7 @@
 		<repository>
 			<id>jMethods</id>
 			<name>jMethods Maven Repository</name>
-			<url>http://www.jMethods.com/mvn-repo</url>
+			<url>https://www.jMethods.com/mvn-repo</url>
 		</repository>
 	</repositories>
 	<scm>
@@ -102,10 +102,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.13.0</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<release>8</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -194,4 +193,17 @@
 			</extension>
 		</extensions>
 	</build>
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<activation><os><family>Windows</family></os></activation>
+			<build><plugins><plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration><excludes>
+					<exclude>com/myjavaworld/jftp/OSXAdapterOld.java</exclude>
+				</excludes></configuration>
+			</plugin></plugins></build>
+		</profile>
+	</profiles>
 </project>
