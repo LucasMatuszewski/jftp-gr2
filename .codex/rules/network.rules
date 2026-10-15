@@ -1,0 +1,8 @@
+# Explicit review requests; network access alone does not invoke the judge.
+prefix_rule(
+    pattern = [["curl", "curl.exe", "wget", "wget.exe"]],
+    decision = "prompt",
+    justification = "Review the destination and upload, download or execution side effects.",
+    match = ["curl https://example.com", "wget https://example.com"],
+    not_match = ["rg ERROR logs"],
+)

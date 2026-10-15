@@ -1,0 +1,48 @@
+# Group two: workspace editing, searchable logs and public network access.
+# Remove legacy sandbox_mode / sandbox_workspace_write from other active layers.
+default_permissions = "project-workspace"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+# Per-result history budget; this does not prohibit full-file reads.
+tool_output_token_limit = 4000
+
+# Request a large context for the selected model, including GPT-6.1 Sol/Luna.
+# Effective capacity remains bounded by the client model catalog.
+model_context_window = 1000000
+model_auto_compact_token_limit = 800000
+
+[features]
+network_proxy = true
+
+[permissions.project-workspace]
+description = "JFTP development with readable logs, protected secret files and public network access."
+extends = ":workspace"
+
+[permissions.project-workspace.filesystem]
+# Recursive deny globs are expanded before sandbox startup on some platforms.
+# This is a scanning bound, not a guarantee about paths deeper than 12 levels.
+glob_scan_max_depth = 12
+
+[permissions.project-workspace.filesystem.":workspace_roots"]
+# Exact source patterns, plus nested variants of the named environment files.
+".env" = "deny"
+".env.local" = "deny"
+".env.dev" = "deny"
+".env.prod" = "deny"
+".env.test" = "deny"
+"**/.env" = "deny"
+"**/.env.local" = "deny"
+"**/.env.dev" = "deny"
+"**/.env.prod" = "deny"
+"**/.env.test" = "deny"
+"secrets" = "deny"
+"**/secrets/**" = "deny"
+# A synthetic template is available for inspection but cannot be edited in this profile.
+".env.example" = "read"
+
+[permissions.project-workspace.network]
+enabled = true
+
+[permissions.project-workspace.network.domains]
+"*" = "allow"
+# The proxy's default local/private-network guard still applies.
