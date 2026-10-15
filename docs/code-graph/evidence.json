@@ -1,0 +1,145 @@
+{
+  "revision": "cdc95025ac74098f129bfd9cdcd613fa6348c8d0",
+  "citations": [
+    {
+      "id": "connect-action",
+      "claim": "ConnectAction calls session.connect(remoteHost).",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/actions/ConnectAction.java",
+      "sha256": "1c6d72787d08f8a9096dff14d50bad8853bcb9b3be9b5d9c5c9270c576fc868f",
+      "start_line": 70,
+      "end_line": 75,
+      "quote": "\t\tRemoteHost remoteHost = connectionDlg.getRemoteHost();\n\t\tconnectionDlg.dispose();\n\t\tif (remoteHost != null) {\n\t\t\tsession.connect(remoteHost);\n\t\t}\n\t}"
+    },
+    {
+      "id": "connect-favorite",
+      "claim": "FavoritesDlg resolves a session and connects the selected host.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/FavoritesDlg.java",
+      "sha256": "6af5844028d74575fcb4fc9320629c98347aa74cb61f70a82c547db781d4f137",
+      "start_line": 232,
+      "end_line": 250,
+      "quote": "\tprivate void connectButtonPressed() {\n\t\tint selectedIndex = listFavorites.getSelectedIndex();\n\t\tif (selectedIndex < 0) {\n\t\t\treturn;\n\t\t}\n\t\tRemoteHost selectedHost = (RemoteHost) (model.get(selectedIndex));\n\t\tFTPSession session = jftp.getCurrentSession();\n\t\tif (session == null) {\n\t\t\tjftp.newSession();\n\t\t\tsession = jftp.getCurrentSession();\n\t\t\t// Double check to make sure we got a non-null session.\n\t\t\tif (session == null) {\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\t\tsaveFavorites();\n\t\tsetVisible(false);\n\t\tsession.connect(selectedHost);\n\t}"
+    },
+    {
+      "id": "reconnect",
+      "claim": "reconnect calls connect(this.remoteHost).",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 701,
+      "end_line": 705,
+      "quote": "\tpublic void reconnect() {\n\t\tif (remoteHost != null) {\n\t\t\tconnect(this.remoteHost);\n\t\t}\n\t}"
+    },
+    {
+      "id": "startup",
+      "claim": "main constructs JFTPApplication; constructor configures preferences, constructs and shows JFTP, creates a session.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPApplication.java",
+      "sha256": "a917c338b788b34890fdf8747e35862ff5abf3ca62aa3230fefa23c6c1d13e0a",
+      "start_line": 32,
+      "end_line": 67,
+      "quote": "\tpublic JFTPApplication() {\n\t\tif (SystemUtil.isMac()) {\n\t\t\tSystem.setProperty(\"apple.laf.useScreenMenuBar\", \"true\");\n\t\t\tSystem.setProperty(\n\t\t\t\t\t\"com.apple.mrj.application.apple.menu.about.name\", \"JFTP\");\n\t\t\tregisterForMacOSXEvents();\n\t\t}\n\t\tLocale.setDefault(JFTP.prefs.getLocale());\n\t\ttry {\n\t\t\tUIManager.setLookAndFeel(JFTP.prefs.getLookAndFeelClassName());\n\t\t} catch (Exception exp) {\n\t\t}\n\n\t\t// SplashWindow splash = new\n\t\t// SplashWindow(JFTPUtil.getIcon(\"splash.gif\"));\n\t\t// splash.setVisible(true);\n\t\t// try {\n\t\t// Thread.sleep(2000);\n\t\t// } catch (InterruptedException e) {\n\t\t// e.printStackTrace();\n\t\t// }\n\t\t//\n\t\t// splash.setVisible(false);\n\t\tjftp = new JFTP();\n\n\t\tif (SystemUtil.isMac()) {\n\t\t\tOSXAdapter.enableFullScreenMode(jftp);\n\t\t}\n\n\t\tjftp.setVisible(true);\n\t\tjftp.newSession();\n\t}\n\n\tpublic static void main(String args[]) {\n\t\tnew JFTPApplication();\n\t}"
+    },
+    {
+      "id": "new-session",
+      "claim": "JFTP.newSession creates FTPSession.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/JFTP.java",
+      "sha256": "845ae223525ea119e310178201fa0f5010fc13888fa27d12d6c18e1cf108350b",
+      "start_line": 148,
+      "end_line": 157,
+      "quote": "\tpublic void newSession() {\n\t\tFTPSession session = new FTPSession(this);\n\t\tString title = resources.getString(\"text.notConnected\");\n\t\ttabs.addTab(title, session);\n\t\ttabs.setSelectedComponent(session);\n\t}\n\n\tpublic void windowOpened(WindowEvent evt) {\n\t\tif (prefs.getWindowBounds() == null) {\n\t\t\tsetExtendedState(Frame.MAXIMIZED_BOTH);"
+    },
+    {
+      "id": "panes",
+      "claim": "FTPSession creates local/remote panes and status window.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 287,
+      "end_line": 295,
+      "quote": "\t}\n\n\tprivate Component getCenterPanel() {\n\t\tlocalPane = new LocalPane(this);\n\t\tremotePane = new RemotePane(this);\n\t\tstatusWindow = new StatusWindow();\n\t\tMScrollPane scroller = new MScrollPane(statusWindow);\n\n\t\tsplitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, localPane,"
+    },
+    {
+      "id": "worker",
+      "claim": "Connection work creates a SwingWorker, reflectively loads FTP classes, then calls client.connect/login.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 617,
+      "end_line": 653,
+      "quote": "\t\tnew SwingWorker() {\n\n\t\t\tRemoteFile[] data = null;\n\n\t\t\t@Override\n\t\t\tpublic Object construct() {\n\t\t\t\ttry {\n\t\t\t\t\tclient = (FTPClient) Class.forName(\n\t\t\t\t\t\t\tremoteHost.getFTPClientClassName()).newInstance();\n\t\t\t\t\tlistParser = (ListParser) Class.forName(\n\t\t\t\t\t\t\tremoteHost.getListParserClassName()).newInstance();\n\t\t\t\t\tclient.setListParser(listParser);\n\t\t\t\t\tclient.setPassive(remoteHost.isPassive());\n\t\t\t\t\tclient.setTimeout(JFTP.prefs.getTimeout());\n\t\t\t\t\tclient.setBufferSize(JFTP.prefs.getBufferSize());\n\t\t\t\t\tclient.setSSLUsage(remoteHost.getSSLUsage());\n\t\t\t\t\tclient.setDataChannelUnencrypted(remoteHost\n\t\t\t\t\t\t\t.isDataChannelUnencrypted());\n\t\t\t\t\tif (remoteHost.getSSLUsage() != FTPConstants.USE_NO_SSL) {\n\t\t\t\t\t\tclient.setSSLContext(JFTPSSLContext.getSSLContext(jftp,\n\t\t\t\t\t\t\t\tremoteHost.getHostName()));\n\t\t\t\t\t}\n\t\t\t\t\tclient.addControlConnectionListener(FTPSession.this);\n\t\t\t\t\tclient.addDataConnectionListener(FTPSession.this);\n\t\t\t\t\tclient.addFTPConnectionListener(FTPSession.this);\n\t\t\t\t\ttry {\n\t\t\t\t\t\tint port = 0;\n\t\t\t\t\t\tif (remoteHost.getSSLUsage() == FTPConstants.USE_IMPLICIT_SSL) {\n\t\t\t\t\t\t\tport = remoteHost.getImplicitSSLPort();\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\tport = remoteHost.getPort();\n\t\t\t\t\t\t}\n\t\t\t\t\t\tclient.connect(remoteHost.getHostName(), port);\n\t\t\t\t\t\tclient.login(remoteHost.getUser(),\n\t\t\t\t\t\t\t\tremoteHost.getPassword(),\n\t\t\t\t\t\t\t\tremoteHost.getAccount());\n\t\t\t\t\t} catch (FTPException exp) {"
+    },
+    {
+      "id": "worker-other",
+      "claim": "The graph's L617 SwingWorker target at L1500 belongs to disconnect, so that target is rejected.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "sha256": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+      "start_line": 1495,
+      "end_line": 1508,
+      "quote": "\tpublic void disconnect() {\n\t\tif (client == null || !client.isConnected()) {\n\t\t\treturn;\n\t\t}\n\t\tsetBusy(true);\n\t\tnew SwingWorker() {\n\n\t\t\t@Override\n\t\t\tpublic Object construct() {\n\t\t\t\ttry {\n\t\t\t\t\tclient.disconnect();\n\t\t\t\t} catch (FTPException exp) {\n\t\t\t\t\tftpException(exp);\n\t\t\t\t} catch (ConnectionException exp) {"
+    },
+    {
+      "id": "renderer-favorites",
+      "claim": "ImageCellRenderer has a constructor reference in FavoritesDlg.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/FavoritesDlg.java",
+      "sha256": "6af5844028d74575fcb4fc9320629c98347aa74cb61f70a82c547db781d4f137",
+      "start_line": 265,
+      "end_line": 270,
+      "quote": "\t\tlistFavorites = new MList(model);\n\t\tlistFavorites.setVisibleRowCount(15);\n\t\tlistFavorites.setCellRenderer(new ImageCellRenderer(JFTPUtil\n\t\t\t\t.getIcon(\"server16.gif\")));\n\t\tlistFavorites.setPrototypeCellValue(\"ftp.jMethods.com\");\n\t\tMScrollPane listScroller = new MScrollPane(listFavorites);"
+    },
+    {
+      "id": "renderer-preferences",
+      "claim": "ImageCellRenderer has a constructor reference in PreferencesDlg.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/PreferencesDlg.java",
+      "sha256": "69f622dbf480bd6e86754cca493d7612eac596b33016e4f0e5fbb4579ac2869f",
+      "start_line": 170,
+      "end_line": 173,
+      "quote": "\n\t\tMTree tree = new MTree(nodeRoot);\n\t\ttree.setCellRenderer(new ImageCellRenderer());\n\t\ttree.setShowsRootHandles(true);"
+    },
+    {
+      "id": "thread-var",
+      "claim": "ThreadVar is instantiated by SwingWorker.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/gui/SwingWorker.java",
+      "sha256": "7af6d4940056dfd7cb13663695cc23888c18a4dccbb1fd1f349629eae4ef8ac4",
+      "start_line": 143,
+      "end_line": 147,
+      "quote": "\t\t};\n\n\t\tThread t = new Thread(doConstruct);\n\t\tthreadVar = new ThreadVar(t);\n\t}"
+    },
+    {
+      "id": "transferables",
+      "claim": "Both transferables have explicit constructor calls.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/DnDTransferHandler.java",
+      "sha256": "004dc2a3cfead33f673686644a83e8698df5fdd35f30b87959da66120c5fe322",
+      "start_line": 73,
+      "end_line": 84,
+      "quote": "\t}\n\n\t@Override\n\tprotected Transferable createTransferable(JComponent c) {\n\t\tif (\"localPane\".equals(c.getName())) {\n\t\t\treturn new LocalFileTransferable(jftp.getCurrentSession()\n\t\t\t\t\t.getSelectedLocalFiles());\n\t\t} else if (\"remotePane\".equals(c.getName())) {\n\t\t\treturn new RemoteFileTransferable(jftp.getCurrentSession()\n\t\t\t\t\t.getSelectedRemoteFiles());\n\t\t} else {\n\t\t\treturn null;"
+    },
+    {
+      "id": "ftp-default",
+      "claim": "Default FTP implementation and parser class names are stored as strings.",
+      "status": "observed",
+      "path": "src/main/java/com/myjavaworld/jftp/RemoteHost.java",
+      "sha256": "451d94d3e00274b95e0f7275aaca463d9bbac9f8d989d0640f950acc6ef5bd37",
+      "start_line": 34,
+      "end_line": 39,
+      "quote": "\n\tprivate static final long serialVersionUID = -3213664402994404410L;\n\tpublic static final String DEFAULT_FTP_CLIENT_CLASS_NAME = \"com.myjavaworld.ftp.DefaultFTPClient\";\n\tpublic static final String DEFAULT_LIST_PARSER_CLASS_NAME = \"com.myjavaworld.ftp.DefaultListParser\";\n\tprotected String name = null;\n\tprotected String hostName = null;"
+    },
+    {
+      "id": "dependency",
+      "claim": "ftpapi 3.0.0 and JavaHelp are declared external dependencies.",
+      "status": "observed",
+      "path": "pom.xml",
+      "sha256": "5746084f899edba87754df13e992964db0810d3893feeadf4cad54461eb473bb",
+      "start_line": 70,
+      "end_line": 88,
+      "quote": "\t\t</dependency>\n\t\t<dependency>\n\t\t\t<groupId>com.myjavaworld</groupId>\n\t\t\t<artifactId>ftpapi</artifactId>\n\t\t\t<version>3.0.0</version>\n\t\t</dependency>\n\t\t<dependency>\n\t\t\t<groupId>javax.help</groupId>\n\t\t\t<artifactId>javahelp</artifactId>\n\t\t\t<version>2.0.05</version>\n\t\t</dependency>\n\t</dependencies>\n\n\t<build>\n\t\t<resources>\n\t\t\t<resource>\n\t\t\t\t<directory>src/main/resources</directory>\n\t\t\t</resource>\n\t\t\t<resource>"
+    }
+  ]
+}
