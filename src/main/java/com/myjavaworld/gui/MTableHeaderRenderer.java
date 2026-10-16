@@ -55,6 +55,7 @@ public class MTableHeaderRenderer extends JLabel implements TableCellRenderer {
 		super();
 		this.icon = icon;
 		setHorizontalAlignment(CENTER);
+		setOpaque(true);
 		setBorder(UIManager.getBorder("TableHeader.cellBorder"));
 		setBackground((Color) UIManager.get("TableHeader.background"));
 		setForeground((Color) UIManager.get("TableHeader.foreground"));
@@ -63,6 +64,7 @@ public class MTableHeaderRenderer extends JLabel implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int col) {
 
+		setFont(table.getTableHeader().getFont());
 		setText(String.valueOf(value));
 		if (icon != null) {
 			setIcon(icon);

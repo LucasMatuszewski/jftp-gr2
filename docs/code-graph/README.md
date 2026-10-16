@@ -73,3 +73,8 @@ Start with a bounded question and exact symbol. Inspect callers or a shallow imp
 See the [source-checked architecture sketch](architecture.md) and [open-source tool comparison](tool-comparison.md). For later Java API refactoring, evaluate JDT-backed navigation once the project and dependencies import correctly. The current AST graph is useful now but cannot certify overload resolution, virtual dispatch or safe deletion.
 
 Only `artifacts/` is ignored. Primary graph, evidence, provenance and helper files remain Git-visible, with scoped LF attributes. No persistent process, watcher, server, MCP entry, hook or AGENTS.md instruction was installed. The Beads bridge could not run because its WSL launch returned `Wsl/Service/E_ACCESSDENIED`; no shared issue was created or updated from this session.
+
+
+## Sygnity UI refresh, 2026-10-16
+
+A new [change-labelled snapshot](../context-snapshots/sygnity-ui-90f300211437/README.md) records the agreed styling step. Use its per-file source manifest and stated scope when navigating that implementation. The original outputs in this directory remain historical and unchanged.

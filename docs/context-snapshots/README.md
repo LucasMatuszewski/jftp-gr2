@@ -5,6 +5,7 @@ This catalogue identifies saved analysis inputs for agents. Snapshots preserve e
 | Snapshot | Purpose | Recorded source state |
 | --- | --- | --- |
 | [original-initial-context](original-initial-context/README.md) | Immutable reference copy of the RepoMap, Repomix and code graph available when this convention was adopted. | Earlier working-tree analysis, based on `cdc95025ac74098f129bfd9cdcd613fa6348c8d0`, including startup changes. Exact scope and byte hashes are in its manifest; it is not a pristine upstream snapshot. |
+| [Sygnity UI refresh](sygnity-ui-90f300211437/README.md) | Styling defaults, decorative toolbar logo, table/status presentation and presentation tests. | Dirty working tree at `8cec56fe7083`; source manifest `sygnity-ui-90f300211437`; native WSLg verification recorded separately. |
 
 No new analysis was generated when the original snapshot was archived. The existing files in `docs/repo-maps/`, `docs/RepoMix/` and `docs/code-graph/` are retained for existing references; their generated outputs also belong to the original reference set and must not be refreshed in place. Those directories' guides and maintained tooling may evolve without changing archived snapshot bytes.
 

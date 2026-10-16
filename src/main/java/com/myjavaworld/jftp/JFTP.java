@@ -122,6 +122,7 @@ public class JFTP extends MFrame implements WindowListener, ActionListener,
 
 	public JFTP(boolean applet) {
 		super(JFTPConstants.PRODUCT_NAME);
+		SygnityStyle.install();
 		this.applet = applet;
 		if (resources == null) {
 			if (resources == null) {

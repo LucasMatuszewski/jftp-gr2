@@ -1,0 +1,1 @@
+Real jFTP Swing desktop screenshots, 2026-10-16, Linux/Metal under WSLg. See docs/sygnity-ui-refresh.md for changes, commands and limits. before.png and after.png have 1100x760 client areas. No image content was generated or retouched.

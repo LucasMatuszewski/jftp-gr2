@@ -47,3 +47,8 @@ $contextStage = Join-Path $toolRoot ('generation-' + (Get-Date -Format 'yyyyMMdd
 ```
 
 Helpers are local ignored artifacts. For another checkout, the primary provenance provides the selected paths, processing policy and exact dependency pins; the skill's mapper and exporter provide the standard generation path. Do not reuse `--pack-only` after changing source: regenerate maps too. No application build, tests or GUI launch are part of this refresh.
+
+
+## Sygnity UI refresh, 2026-10-16
+
+A new [change-labelled snapshot](../context-snapshots/sygnity-ui-90f300211437/README.md) records the agreed styling step. Use its per-file source manifest and stated scope when navigating that implementation. The original outputs in this directory remain historical and unchanged.

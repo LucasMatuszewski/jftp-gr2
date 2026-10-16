@@ -222,10 +222,19 @@ No UI suite or complete native interaction pass is established. Historical start
 
 Source support: [PRD evidence E02, E04, E14, E17](../product/current-behavior-evidence.md), [architecture resources/startup](../design/jftp-architecture-2026-10-15.md), and [baseline ledger](baseline-evidence.md).
 
+## Sygnity presentation decision (2026-10-16)
+
+D001-04: For the user-authorized PRD AC-90-93 styling scope, retain Swing, the saved look-and-feel selection, all existing actions, icons and localized resources. Apply a small centralized developer-defaults palette before content construction, with explicit toolbar/status/header presentation. Package a transparent raster derivative of the supplied SVG through the existing resource root and paint it at its original aspect ratio. No persistence migration or dependency is introduced.
+
+Rationale: this gives the requested visible branding and quieter surfaces while keeping the agreed functionality and legacy resource wiring. A replacement look-and-feel library, runtime SVG library, custom widget toolkit and icon redesign would enlarge the requested change; none is needed for this scope. Platform-specific painters may retain native details, so cross-platform visual parity is not asserted. The existing Java SE 21 Context7 reference above was queried for developer-default precedence.
+
+Verification: three presentation contracts were written before production edits; the corrected Red run failed only for missing branding. All 29 tests then passed. Real native mouse/keyboard QA and screenshots were completed on Linux/Metal under WSLg, with Windows native rendering explicitly unverified. See [change detail and exact commands](../sygnity-ui-refresh.md) and the [source snapshot](../context-snapshots/sygnity-ui-90f300211437/README.md). Existing diagrams remain valid: this adds presentation defaults and a decorative resource, not a new application workflow or service.
+
 ## Change History
 
 | Date | Change | Interpretation |
 | --- | --- | --- |
 | 2026-10-16 | Initial retrospective baseline. | Source observations and historical execution remain distinct. |
+| 2026-10-16 | D001-04: agreed Sygnity presentation refresh; PRD AC-90-93. | Native WSLg QA and 29 passing tests recorded separately from unverified Windows rendering. |
 
 Future decisions update this file and add a dated history entry identifying changed decision IDs, rationale and affected PRD IDs. Git retains prior text; a new ADR number is not required merely to revise this area. No future architecture or test completion is implied by this baseline.

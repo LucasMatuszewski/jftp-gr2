@@ -1,0 +1,46 @@
+{
+  "citations": [
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTP.java",
+      "sha256": "35a066925c15b34ce87d0baac288811733209b3ee860dbafe51f71fb1f753b98",
+      "start_line": 124,
+      "end_line": 125,
+      "quote": "\t\tsuper(JFTPConstants.PRODUCT_NAME);\n\t\tSygnityStyle.install();"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPToolBar.java",
+      "sha256": "bd5307a0725499200ddbc13df2ad02aae663b2360927fd012bedb01fdf4da5b8",
+      "start_line": 275,
+      "end_line": 278,
+      "quote": "\n\t\tadd(butHelp);\n\t\tadd(Box.createHorizontalGlue());\n\t\tadd(SygnityStyle.logo());"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/StatusBar.java",
+      "sha256": "de8537b11d7941c2007b7cf5e989ff8c67f7b77405552ae488d25550a90914c8",
+      "start_line": 108,
+      "end_line": 120,
+      "quote": "\tprivate void initComponents() {\n\t\tlabStatus = new MLabel();\n\t\tprogressBar = new JProgressBar(SwingConstants.HORIZONTAL);\n\t\tprogressBar.setStringPainted(true);\n\t\tprogressBar.setMinimum(0);\n\t\tprogressBar.setBorder(SygnityStyle.statusCellBorder());\n\t\tlabSpeed = new MLabel(\"\", SwingConstants.RIGHT);\n\t\tlabSpeed.setBorder(SygnityStyle.statusCellBorder());\n\t\tlabElapsedTime = new MLabel(\"\");\n\t\tlabElapsedTime.setBorder(SygnityStyle.statusCellBorder());\n\n\t\tlabSecured = new MLabel(\"  \");\n\t\tlabSecured.setBorder(SygnityStyle.statusCellBorder());"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPApplication.java",
+      "sha256": "a917c338b788b34890fdf8747e35862ff5abf3ca62aa3230fefa23c6c1d13e0a",
+      "start_line": 39,
+      "end_line": 43,
+      "quote": "\t\tLocale.setDefault(JFTP.prefs.getLocale());\n\t\ttry {\n\t\t\tUIManager.setLookAndFeel(JFTP.prefs.getLookAndFeelClassName());\n\t\t} catch (Exception exp) {\n\t\t}"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPApplet.java",
+      "sha256": "207a069b4b87f8e1901a56d2dccd68f416e810edbef81bbae04952ab281931c9",
+      "start_line": 70,
+      "end_line": 77,
+      "quote": "\t\tIcon launchIcon = JFTPUtil.getIcon(\"launch.gif\");\n\t\tbutStart = new MButton(launchIcon);\n\t\tbutStart.setBackground(Color.WHITE);\n\t\tbutStart.setBorder(BorderFactory.createEmptyBorder());\n\t\tbutStart.setPreferredSize(new Dimension(launchIcon.getIconWidth(),\n\t\t\t\tlaunchIcon.getIconHeight()));\n\t\tbutStart.setMaximumSize(new Dimension(launchIcon.getIconWidth(),\n\t\t\t\tlaunchIcon.getIconHeight()));"
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/gui/IndentIcon.java",
+      "sha256": "b4596c5863c7e68bad8c0cea6ee5c430528b975f1987914350d3ea801ce383e8",
+      "start_line": 61,
+      "end_line": 74,
+      "quote": "\tpublic void paintIcon(Component c, Graphics g, int x, int y) {\n\t\tif (c.getComponentOrientation().isLeftToRight()) {\n\t\t\ticon.paintIcon(c, g, x + depth * space, y);\n\t\t} else {\n\t\t\ticon.paintIcon(c, g, x, y);\n\t\t}\n\t}\n\n\tpublic int getIconWidth() {\n\t\treturn icon.getIconWidth() + depth * space;\n\t}\n\n\tpublic int getIconHeight() {\n\t\treturn icon.getIconHeight();"
+    }
+  ]
+}

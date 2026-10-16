@@ -24,7 +24,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
 
 import com.myjavaworld.gui.MLabel;
 import com.myjavaworld.util.ResourceLoader;
@@ -51,7 +50,9 @@ public class StatusBar extends JPanel {
 	public StatusBar() {
 		super();
 		setLayout(new BorderLayout(0, 0));
-		setBorder(BorderFactory.createEtchedBorder());
+		setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(1, 0, 0, 0, SygnityStyle.LINE),
+				BorderFactory.createEmptyBorder(4, 8, 4, 8)));
 		speedFormat = new MessageFormat(resources.getString("value.speed"));
 		elapsedTimeFormat = new MessageFormat(
 				resources.getString("value.elapsedTime"));
@@ -109,17 +110,14 @@ public class StatusBar extends JPanel {
 		progressBar = new JProgressBar(SwingConstants.HORIZONTAL);
 		progressBar.setStringPainted(true);
 		progressBar.setMinimum(0);
-		progressBar.setBorder(BorderFactory
-				.createBevelBorder(BevelBorder.LOWERED));
+		progressBar.setBorder(SygnityStyle.statusCellBorder());
 		labSpeed = new MLabel("", SwingConstants.RIGHT);
-		labSpeed.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		labSpeed.setBorder(SygnityStyle.statusCellBorder());
 		labElapsedTime = new MLabel("");
-		labElapsedTime.setBorder(BorderFactory
-				.createBevelBorder(BevelBorder.LOWERED));
+		labElapsedTime.setBorder(SygnityStyle.statusCellBorder());
 
 		labSecured = new MLabel("  ");
-		labSecured.setBorder(BorderFactory
-				.createBevelBorder(BevelBorder.LOWERED));
+		labSecured.setBorder(SygnityStyle.statusCellBorder());
 
 		JPanel subPanel = new JPanel(new GridLayout(1, 4, 5, 0));
 

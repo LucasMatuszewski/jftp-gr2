@@ -509,3 +509,15 @@ Gaps and limitations identify decisions for later work. They do not prescribe fi
 | Date | Version | Correction |
 | --- | --- | --- |
 | 2026-10-16 | 1.1 | Deeper caller/wiring review established that the certificate manager's client tab is commented out and the warning certificate view has a separate Install action. AC-58/61 and F10/UI were clarified, and AC-89 records an existing omitted path. This is a documentation correction, not an implemented feature or newly executed acceptance test. |
+
+
+## 13. Agreed Sygnity appearance refresh (2026-10-16)
+
+The user authorized a small desktop styling refresh using the supplied Sygnity assets and palette. This change affects presentation in F01/F03/F09 only; the functional baseline and existing acceptance criteria remain applicable.
+
+- AC-90: Display the supplied cyan Sygnity wordmark at the right of the top toolbar, preserving its proportions on a white surface. Branding is decorative and creates no new action or keyboard stop.
+- AC-91: Retain every existing toolbar button, icon, tooltip, listener, action order, enabled-state rule, menu, dialog and workflow. Do not change FTP/FTPS, saved settings, favorites, certificates or localization.
+- AC-92: Use white and light-gray surfaces, graphite text, restrained cyan/blue accents, flatter borders and modest spacing. Preserve readable selection/focus and the user's chosen look and feel; do not add a UI dependency or download fonts at runtime.
+- AC-93: Capture comparable real desktop screenshots before and after, plus selection/dialog and narrower-window states. Review overlap, logo clarity, contrast and keyboard navigation using isolated synthetic state with automatic updates disabled and no external FTP connections. Record build, tests, startup and native QA separately.
+
+These are newly agreed requirements, not claims about historical behavior or completed verification. Detailed results belong in `docs/sygnity-ui-refresh.md`.
