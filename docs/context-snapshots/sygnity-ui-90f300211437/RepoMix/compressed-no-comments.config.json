@@ -1,0 +1,28 @@
+{
+  "include": [
+    "src/**/*.java",
+    "pom.xml",
+    "assets/design-tokens.json"
+  ],
+  "ignore": {
+    "useGitignore": false
+  },
+  "output": {
+    "style": "xml",
+    "parsableStyle": true,
+    "compress": true,
+    "removeComments": true,
+    "removeEmptyLines": false,
+    "git": {
+      "sortByChanges": false,
+      "includeDiffs": false,
+      "includeLogs": false
+    }
+  },
+  "security": {
+    "enableSecurityCheck": true
+  },
+  "tokenCount": {
+    "encoding": "o200k_base"
+  }
+}

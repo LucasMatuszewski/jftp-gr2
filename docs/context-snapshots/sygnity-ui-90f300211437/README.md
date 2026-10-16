@@ -1,0 +1,13 @@
+# Sygnity UI source snapshot
+
+2026-10-16. Styling-only desktop step, PRD AC-90-93. Source identity and exact commands are in [manifest.json](manifest.json); the source was frozen in external staging, then rehashed against the checkout before publication. The actual dirty working tree includes earlier unrelated changes. This snapshot is source navigation evidence, not a clean source commit or a claim about every runtime flow.
+
+- [Overview](repo-maps/jftp.overview.md): native mapper 0.3.0, 16,384 estimated-token budget; 1,016 of 1,642 captured definitions, 626 omitted.
+- [Complete captured-definition index](repo-maps/jftp.definitions.md): all 1,642 captured definitions in 191 parsed Java files, no syntax/parse failures. This is query coverage, not every possible Java relationship. Raw maps and source metadata are alongside each report.
+- [Full-code pack](RepoMix/jftp.full-no-comments.xml): selected Java, Maven descriptor and palette tokens; supported comments removed. Binary assets and the remaining resources/help/assembly are not in this selected text pack.
+- [Compressed pack](RepoMix/jftp.compressed-no-comments.xml): same selected input set and comment policy, lossy structural extraction; never use it alone to establish behavior. Repomix 1.18.1.
+- [Code graph](code-graph/jftp.graph.json): Graphify 0.9.91 code-only, no clustering or model calls; 2,396 nodes / 7,669 edges. [Review](code-graph/validation.json) distinguishes three verified new call edges from five unsupported generic Icon target resolutions. [Six source citations](code-graph/evidence.json) passed the skill checker. Repeated calls can collapse to one edge, reflection and dependencies are unresolved, and most edges remain unreviewed.
+
+The maps and packs were generated from an exact frozen copy at the staging path recorded in metadata. Their original Git revision is intentionally absent in that copy; the manifest records the real checkout HEAD, dirty state and per-file hashes. Do not relabel staging metadata as an analysis of a clean commit. All three products used this one frozen source state; the mapper selected Java under `src`, the pack additionally selected build/palette text, and the graph includes build metadata. The manifest also hashes the logo PNG and original SVG even though binary pixels are outside the text products.
+
+The original snapshot was verified unchanged before and after extraction. [Comparison with original and parent](comparison.md). [Implementation and runtime evidence](../../sygnity-ui-refresh.md). Existing root graph helpers target historical outputs; do not run in-place refreshes or use their exact-HEAD guard as a freshness check for this new snapshot.

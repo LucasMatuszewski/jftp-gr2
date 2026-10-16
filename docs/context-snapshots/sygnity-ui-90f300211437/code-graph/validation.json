@@ -1,0 +1,122 @@
+{
+  "source_checked_calls": [
+    {
+      "source": "src_main_java_com_myjavaworld_jftp_jftp_jftp_jftp",
+      "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_install",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main/java/com/myjavaworld/jftp/JFTP.java",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_main_java_com_myjavaworld_jftp_jftptoolbar_jftptoolbar_preparetoolbar",
+      "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_logo",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main/java/com/myjavaworld/jftp/JFTPToolBar.java",
+      "source_location": "L278",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_main_java_com_myjavaworld_jftp_statusbar_statusbar_initcomponents",
+      "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_statuscellborder",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main/java/com/myjavaworld/jftp/StatusBar.java",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "unsupported_target_resolution": [
+    {
+      "edge": {
+        "source": "src_main_java_com_myjavaworld_gui_indenticon_indenticon_painticon",
+        "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_logo_object_icon_l88_painticon",
+        "relation": "calls",
+        "context": "call",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "src/main/java/com/myjavaworld/gui/IndentIcon.java",
+        "source_location": "L63",
+        "weight": 1.0,
+        "_origin": "ast"
+      },
+      "reason": "Generic Icon dispatch is not proof of this anonymous Sygnity icon target; applet launchIcon explicitly comes from launch.gif."
+    },
+    {
+      "edge": {
+        "source": "src_main_java_com_myjavaworld_gui_indenticon_indenticon_geticonwidth",
+        "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_logo_object_icon_l88_geticonwidth",
+        "relation": "calls",
+        "context": "call",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "src/main/java/com/myjavaworld/gui/IndentIcon.java",
+        "source_location": "L70",
+        "weight": 1.0,
+        "_origin": "ast"
+      },
+      "reason": "Generic Icon dispatch is not proof of this anonymous Sygnity icon target; applet launchIcon explicitly comes from launch.gif."
+    },
+    {
+      "edge": {
+        "source": "src_main_java_com_myjavaworld_gui_indenticon_indenticon_geticonheight",
+        "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_logo_object_icon_l88_geticonheight",
+        "relation": "calls",
+        "context": "call",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "src/main/java/com/myjavaworld/gui/IndentIcon.java",
+        "source_location": "L74",
+        "weight": 1.0,
+        "_origin": "ast"
+      },
+      "reason": "Generic Icon dispatch is not proof of this anonymous Sygnity icon target; applet launchIcon explicitly comes from launch.gif."
+    },
+    {
+      "edge": {
+        "source": "src_main_java_com_myjavaworld_jftp_jftpapplet_jftpapplet_initcomponents",
+        "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_logo_object_icon_l88_geticonwidth",
+        "relation": "calls",
+        "context": "call",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "src/main/java/com/myjavaworld/jftp/JFTPApplet.java",
+        "source_location": "L74",
+        "weight": 1.0,
+        "_origin": "ast"
+      },
+      "reason": "Generic Icon dispatch is not proof of this anonymous Sygnity icon target; applet launchIcon explicitly comes from launch.gif."
+    },
+    {
+      "edge": {
+        "source": "src_main_java_com_myjavaworld_jftp_jftpapplet_jftpapplet_initcomponents",
+        "target": "src_main_java_com_myjavaworld_jftp_sygnitystyle_sygnitystyle_logo_object_icon_l88_geticonheight",
+        "relation": "calls",
+        "context": "call",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "src/main/java/com/myjavaworld/jftp/JFTPApplet.java",
+        "source_location": "L75",
+        "weight": 1.0,
+        "_origin": "ast"
+      },
+      "reason": "Generic Icon dispatch is not proof of this anonymous Sygnity icon target; applet launchIcon explicitly comes from launch.gif."
+    }
+  ],
+  "limitations": [
+    "Raw extractor graph preserved. Only listed source sites reviewed. No whole-program or reflective completeness claimed.",
+    "Graph collapses repeated calls: StatusBar has four statusCellBorder calls, but the graph records one call edge.",
+    "Saved LAF is installed before JFTP constructs styled content; no LAF-selection behavior was changed."
+  ]
+}

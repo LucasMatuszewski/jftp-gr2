@@ -53,3 +53,8 @@ These checks validate packing and code preservation, not a working build or appl
 [Provenance](provenance.json) is Git-visible and contains the exact include list, full configuration, original source hashes and encodings, output hashes, profile and validation metrics. Local configuration, logs, detailed audits and helpers are under ignored `artifacts/`. The primary XML has a scoped `-text` Git attribute so checkout conversion does not change its recorded hash.
 
 Use the [shared refresh instructions](../repo-maps/README.md#refresh) to regenerate both maps and this pack. Refresh after relevant source changes; configuration changes also require regeneration. Never use this comment-stripped pack to infer original documentation or code outside its declared scope.
+
+
+## Sygnity UI refresh, 2026-10-16
+
+A new [change-labelled snapshot](../context-snapshots/sygnity-ui-90f300211437/README.md) records the agreed styling step. Use its per-file source manifest and stated scope when navigating that implementation. The original outputs in this directory remain historical and unchanged.

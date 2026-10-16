@@ -81,7 +81,8 @@ public class JFTPToolBar extends JToolBar {
 
 	public JFTPToolBar(JFTP jftp) {
 		super(SwingConstants.HORIZONTAL);
-		setBorder(BorderFactory.createEtchedBorder());
+		setBackground(SygnityStyle.WHITE);
+		setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, SygnityStyle.CYAN));
 		this.jftp = jftp;
 		setFloatable(false);
 		this.setRollover(true);
@@ -90,7 +91,7 @@ public class JFTPToolBar extends JToolBar {
 
 	@Override
 	public Insets getInsets() {
-		return new Insets(2, 2, 2, 2);
+		return new Insets(8, 12, 8, 12);
 	}
 
 	private void prepareToolBar() {
@@ -273,6 +274,8 @@ public class JFTPToolBar extends JToolBar {
 		addSeparator();
 
 		add(butHelp);
+		add(Box.createHorizontalGlue());
+		add(SygnityStyle.logo());
 	}
 
 	@Override
