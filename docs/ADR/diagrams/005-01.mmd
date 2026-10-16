@@ -1,0 +1,12 @@
+flowchart TD
+    Selection["⚙️ Pane selection and filters"] --> Actions["File and ZIP actions"]
+    Actions --> Session["FTPSession"]
+    Session --> Local["LocalFile and filesystem"]
+    Session --> FTP["External FTP client"]
+    Actions --> ZIP["In-repository ZIP tools"]
+    ZIP --> Local
+    Session --> Temp["Temporary local copy"]
+    Temp --> Desktop["Associated open, edit or print"]
+    Temp --> Monitor["Last-modified timestamp monitor"]
+    Monitor --> Prompt["Approve upload?"]
+    Prompt --> FTP

@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Form as Command dialog
+    participant Session as Connected session worker
+    participant API as FTP client
+    User->>Form: Enter command lines
+    alt Blank input
+        Form-->>User: Validation error, keep form open
+    else Approved nonblank lines
+        Form->>Session: Submit ordered lines
+        loop Each line
+            Session->>Session: Uppercase in current locale and compare first characters
+            alt Restricted prefix
+                Note over Session: Skip without forwarding
+            else Other line
+                Session->>API: Execute command
+                API-->>Session: Result or handled error
+            end
+        end
+    end

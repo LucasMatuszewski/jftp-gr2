@@ -1,0 +1,16 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Form as File dialog or confirmation
+    participant Session
+    participant Target as Filesystem or FTP boundary
+    User->>Form: Create, rename, delete or change permissions
+    alt Invalid rename text
+        Form-->>User: Keep form open with error
+    else Cancel or decline confirmation
+        Form-->>User: No operation submitted
+    else Approved
+        Form->>Session: Submit approved values
+        Session->>Target: Attempt operation, recurse through eligible children if needed
+        Note over Session,Target: Local delete failures can be unreported
+        Session-->>User: Refresh or report handled failure
+    end

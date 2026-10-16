@@ -1,0 +1,11 @@
+flowchart TD
+    Frame["⚙️ JFTP frame"] --> Session["Mutable FTPSession"]
+    Session -.-> Frame
+    Session --> Worker["Custom SwingWorker"]
+    Worker --> Construct["construct on worker"]
+    Construct -->|Normal return| Finished["finished queued on EDT"]
+    Construct -->|Unchecked failure| NoCallback["Completion may not be queued"]
+    Session --> Shared["Busy, abort and progress fields"]
+    Session --> Monitor["Session file-change monitor"]
+    Abort["Abort action"] --> Shared
+    Abort --> AbortWorker["Separate protocol-abort worker"]

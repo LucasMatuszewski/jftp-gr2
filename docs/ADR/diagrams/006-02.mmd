@@ -1,0 +1,10 @@
+flowchart LR
+    Main["⚙️ src/main/java"] --> Classes["target/classes"]
+    Assets["Bundles, images and help"] --> Classes
+    Tests["src/test/java"] --> TestClasses["target/test-classes"]
+    Classes --> Jar["Main JAR"]
+    Classes --> TestRun["Surefire test execution"]
+    TestClasses --> TestRun
+    Jar --> Package["Configured binary assembly"]
+    Dependencies["Runtime dependencies"] --> Package
+    Launchers["Launcher templates"] --> Package

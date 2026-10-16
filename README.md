@@ -191,6 +191,13 @@ See the [source-checked architecture diagrams](docs/design/jftp-architecture-202
 for components, startup, connection, transfers and persistence, including scope
 and verification limits.
 
+See the [retrospective ADR baseline](docs/ADR/000-main-architecture.md) for eight
+records covering the current technology, interfaces, data, consequences and
+verification boundaries. Accepted baseline status records the existing system;
+it does not recommend retaining every choice during modernization. Future
+decisions update the affected record and its dated history, with earlier text
+preserved in Git.
+
 Development repository and branches
 -----------------------------------
 

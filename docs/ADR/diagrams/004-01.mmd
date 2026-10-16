@@ -1,0 +1,13 @@
+flowchart TD
+    Home["⚙️ JVM user.home at class initialization"] --> Data["Default .jftp/data"]
+    Data --> PrefFile["preferences.ser"]
+    Data --> FavFile["favorites.ser"]
+    PrefFile <--> Pref["Global JFTPPreferences"]
+    FavFile <--> Manager["FavoritesManager"]
+    Manager --> Format["AES-sealed object or plain list fallback"]
+    Pref --> Paths["Configured paths and passwords"]
+    Paths --> Stores["KeyStoreManager static caches"]
+    Stores <--> Server["Server JKS"]
+    Stores <--> Client["Client JKS"]
+    Stores --> Trust["Key and trust managers"]
+    Trust --> Warning["Instance-level warning decision"]

@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Action as Archive action
+    participant ZIP as ZIP utility
+    participant Session
+    participant Files as Local archive and destination
+    User->>Action: Approve archive options
+    alt Zip and Upload
+        Action->>ZIP: Package eligible local selection
+        ZIP->>Files: Create archive
+        Action->>Session: Attempt archive upload
+    else Download and Unzip
+        Action->>Session: Attempt selected ZIP download
+        Note over Action,Session: Handled download failure is not returned as a success token
+        Action->>ZIP: Attempt extraction afterward
+        ZIP->>Files: Extract to approved target or fail
+    end
+    opt Delete-archive option reaches cleanup path
+        Action->>Files: Request archive deletion
+    end
+    Action-->>User: Handled errors and listing refresh

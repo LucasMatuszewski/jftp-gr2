@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Startup as ⚙️ Startup
+    participant Pref as Preference loader
+    participant Disk as preferences.ser
+    participant UI as Preferences dialog
+    Startup->>Pref: Initialize global preferences
+    Pref->>Disk: Read saved object or initialize first use
+    alt Supported saved data
+        Pref-->>Startup: Saved aggregate
+    else Damaged data
+        Pref-->>Startup: Defaults from finally path
+        Note over Pref,Disk: Damaged bytes can remain in place
+    end
+    alt User saves valid panels
+        UI->>Disk: Request direct serialization of applied values
+    else User cancels
+        UI->>UI: Close without dialog save path
+    end

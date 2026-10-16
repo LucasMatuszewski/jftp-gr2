@@ -1,0 +1,27 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Window as Window and update preferences
+    participant Check as AutoUpdater
+    participant Endpoint as Fixed HTTP metadata endpoint
+    alt Automatic checking enabled at window opening
+        Window->>Check: Start delayed checker
+        Check->>Check: Wait 15 seconds
+    else User selects Check Now
+        User->>Window: Request manual check
+        Window->>Check: Start without automatic flag gate or initial delay
+    end
+    loop Retry only after request or processing exceptions
+        Check->>Endpoint: Load update properties
+        alt Request and processing return normally
+            Check->>Check: Compare version strings if latestVersion is nonblank
+            opt Newer version or manual nonblank no-update case
+                Check-->>User: Corresponding information dialog
+            end
+            break Normal completion, including blank or missing version
+                Check->>Check: Exit checker without another request
+            end
+        else Exception
+            Check->>Check: Print error and wait five minutes before retry
+        end
+    end
+    Note over Check,Endpoint: Source behavior only<br/>No request or availability check performed

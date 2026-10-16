@@ -1,0 +1,34 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Action as Desktop action
+    participant Session
+    participant FTP as FTP client
+    participant Desktop as Associated app
+    participant Monitor as Temp monitor
+    User->>Action: Open, edit or print remote file
+    Action->>Session: Request monitored temporary copy
+    Session->>Session: Create temp file<br/>and register delete-on-exit
+    Session->>FTP: Download remote content to temp file
+    alt Download returns normally
+        Session->>Monitor: Register file and remote mapping
+        Session-->>Action: Return temporary file
+        opt Desktop integration supported
+            Action->>Desktop: Request associated operation on copy
+        end
+    else Download fails
+        Session-->>Action: Report error and return null
+        Note over Action,Session: No registered copy<br/>No desktop request
+    end
+    opt Copy successfully registered
+    Monitor->>Monitor: Sample temp file timestamp
+    opt Timestamp increases
+        Monitor->>Session: Change notification
+        Session-->>User: Ask whether to upload
+        alt Yes
+            Session->>Session: Request upload<br/>to mapped remote file
+        else Decline
+            Note over User,Session: No approval for that upload
+        end
+    end
+    end
+    Note over Session,Monitor: Session close stops monitoring<br/>Temp deletion is registered for JVM exit

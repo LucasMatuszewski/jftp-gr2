@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant UI as ⚙️ Connection action or favorite
+    participant Worker as Connection worker
+    participant TLS as Key and trust managers
+    participant API as External ftpapi
+    UI->>Worker: Approved site configuration
+    Worker->>Worker: Construct configured client and parser
+    opt Secure mode configured
+        Worker->>TLS: Create SSL context
+        TLS-->>Worker: Key and trust manager context
+        Worker->>API: Apply secure settings
+    end
+    Worker->>API: Connect and login
+    alt Connect and login return normally
+        Worker->>API: Execute configured commands
+        Worker->>API: Set optional remote directory and list
+    else Connect or login FTP failure
+        Worker->>UI: Report failure
+        Worker->>API: Disconnect and clear session client
+    end
+    Note over Worker,API: Outer configuration, command and listing failures use different handlers
+    Note over Worker,UI: Normal return queues guarded UI completion<br/>This is not universal success

@@ -1,0 +1,18 @@
+sequenceDiagram
+    actor Developer
+    participant Maven as ⚙️ Maven
+    participant Compile as Compiler and resources
+    participant Tests as Surefire
+    participant Package as JAR and assembly
+    participant Desktop as Native application
+    Developer->>Maven: Request selected lifecycle phase
+    Maven->>Compile: Process resources and compile
+    opt Phase includes test
+        Maven->>Tests: Discover and execute tests
+    end
+    opt Phase includes package
+        Maven->>Package: Build configured artifacts
+    end
+    Note over Developer,Package: Configured sequence, not a new execution report
+    Developer->>Desktop: Separate native or packaged startup verification
+    Note over Package,Desktop: Packaging success does not prove<br/>the launcher paths work

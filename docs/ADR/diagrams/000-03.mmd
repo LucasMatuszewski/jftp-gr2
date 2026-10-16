@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant JVM as ⚙️ JVM entry thread
+    participant App as JFTPApplication
+    participant Pref as JFTP preferences
+    participant Frame as JFTP frame
+    participant Session as FTPSession
+    JVM->>App: Start desktop entrypoint
+    App->>Pref: First access initializes and loads preferences
+    App->>App: Apply locale and look and feel
+    App->>Frame: Construct and show frame
+    App->>Frame: Request first session
+    Frame->>Session: Construct session and panes
+    Session->>Session: Start asynchronous local listing
+    Frame->>Frame: Add and select tab
+    Note over JVM,Session: Bootstrap path is not proof of complete EDT compliance
+    Note over Frame,Session: Initial listing may finish after tab creation

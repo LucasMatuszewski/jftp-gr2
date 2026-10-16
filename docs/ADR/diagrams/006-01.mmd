@@ -1,0 +1,11 @@
+flowchart TD
+    POM["⚙️ Single Maven POM"] --> Compile["Compiler release 8"]
+    POM --> Resources["Five resource roots"]
+    Compile --> Jar["Application JAR with entry manifest"]
+    Resources --> Jar
+    Runtime["ftpapi and JavaHelp"] --> Lib["Assembly lib directory"]
+    Jar --> Root["Assembly root"]
+    Lib --> Assembly["Binary distribution"]
+    Root --> Assembly
+    Scripts["Filtered launcher templates"] --> Assembly
+    Scripts --> Mismatch["Targets lib/jftp JAR instead of root application JAR"]

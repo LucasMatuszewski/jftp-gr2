@@ -1,0 +1,17 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Session as FTPSession worker
+    participant API as External FTP client
+    participant Disk as Local filesystem
+    participant UI as Destination pane
+    User->>Session: Submit selected upload or download
+    loop Eligible items while connected and not aborted
+        Session->>Session: Select transfer type and recurse if directory
+        Session->>API: Request transfer with local source or target file
+        API-->>Session: Progress callbacks may arrive during the request
+        API-->>Session: Return normally or throw to per-file handler
+        Note over API,Disk: Local file belongs to the request<br/>Dependency-internal I/O order<br/>is not inspected
+        Note over Session,API: A handled per-file error may permit the next item
+    end
+    Session->>UI: Request destination refresh on normal or handled path
+    Note over User,UI: Refresh is not proof of complete delivery or rollback

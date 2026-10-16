@@ -1,0 +1,20 @@
+flowchart TD
+    User["👤 Desktop user"] --> Frame["JFTP frame and actions"]
+    Frame --> Sessions["FTPSession tabs"]
+    Sessions -.-> Frame
+    Sessions --> Panes["Local and remote panes"]
+    Sessions --> Workers["Custom workers and timers"]
+    Workers --> FTP["External ftpapi"]
+    Sessions --> TLS["JSSE and custom managers"]
+    TLS --> FTP
+    FTP <-->|FTP or configured FTPS| Server["External FTP server"]
+    Sessions --> Files["Filesystem and ZIP tools"]
+    Frame --> State["Preferences, favorites and JKS"]
+    Frame --> Help["Resources and JavaHelp"]
+    Frame --> Updater["Conditional or manual AutoUpdater"]
+    Updater --> Metadata["Historical HTTP metadata endpoint"]
+    Files --> Desktop["Associated desktop applications"]
+    classDef ui fill:#DBEAFE,stroke:#1E3A8A,color:#172554
+    classDef external fill:#F3E8FF,stroke:#6B21A8,color:#3B0764
+    class Frame,Sessions,Panes ui
+    class FTP,Server,Desktop external

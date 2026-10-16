@@ -1,0 +1,28 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant UI as Favorites dialog
+    participant Manager as FavoritesManager
+    participant Disk as favorites.ser
+    participant Session
+    UI->>Manager: Load list
+    Manager->>Disk: Read object stream
+    alt Legacy plain list
+        Manager->>Disk: Immediately rewrite using current save path
+    else Sealed list
+        Manager->>Manager: Decrypt with configured application cipher
+    end
+    Note over Manager,Disk: Corruption or rewrite failure can surface as an error
+    User->>UI: Add, edit or confirm deletion
+    User->>UI: Close or Connect
+    UI->>Manager: Attempt save
+    alt Cipher available
+        Manager->>Disk: Write sealed list
+    else Cipher unavailable
+        Manager->>Disk: Write plain list
+    end
+    opt Save reports failure
+        UI-->>User: Show error
+    end
+    opt Connect selected
+        UI->>Session: Submit selected favorite even after handled save error
+    end

@@ -1,0 +1,16 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant Session as Shared session state
+    participant Transfer as Transfer worker
+    participant Abort as Abort worker
+    participant Disconnect as Disconnect worker
+    participant Connect as New connection worker
+    User->>Session: Request Abort while connected
+    Session->>Session: Set abort flag
+    Session->>Abort: Start protocol abort request
+    Transfer->>Session: Check connection and abort before more work
+    Note over Transfer,Abort: Concurrent requests do not establish immediate stop or rollback
+    User->>Session: Confirm replacing current connection
+    Session->>Disconnect: Start asynchronous disconnect
+    Session->>Connect: Start connection attempt without waiting
+    Note over Disconnect,Connect: Completion order is not guaranteed

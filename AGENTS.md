@@ -16,7 +16,8 @@ Documentation entry point: [README.md](README.md). Its upstream feature/platform
 
 Use the existing analysis selectively; read the guides for their source scope, provenance, omissions and refresh instructions:
 
-- The main application code is in the `src/main` subdirectory; that's where the Java files are, while the test files are in `src/tests`.
+- The main application Java sources are in `src/main/java`; the tests and their helpers are in `src/test/java`.
+- For recorded architectural decisions and their technical contracts, start with the [retrospective ADR baseline](docs/ADR/000-main-architecture.md). Update the affected ADR and its dated change history when an agreed decision changes; Git preserves earlier text.
 - For architecture, system design and symbol navigation, start with the [RepoMap guide](docs/repo-maps/README.md) and its [overview](docs/repo-maps/jftp.overview.python.md). Search the [complete captured-definition index](docs/repo-maps/jftp.definitions.python.md) for declarations omitted from the overview. These are paths/signatures, not method bodies or a resolved call graph.
 - For application workflows and cross-module implementation, use relevant sections of the [full-code Repomix pack](docs/RepoMix/jftp.full-no-comments.xml), following its [guide](docs/RepoMix/README.md). It retains selected implementation bodies but strips supported comments and excludes dependency implementations and binary assets. The compressed pack is lossy structural context; never use it alone to establish behavior.
 - For bounded caller/callee and change-impact questions, follow the [code-graph guide](docs/code-graph/README.md) and [source-checked architecture sketch](docs/code-graph/architecture.md). Check freshness and review annotations; the graph has missing/incorrect edges and does not resolve reflection or all Java dispatch. Missing edges do not prove dead code.

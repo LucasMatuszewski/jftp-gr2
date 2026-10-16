@@ -1,0 +1,18 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant UI as Frame and dialogs
+    participant Pref as Preferences
+    participant Boot as Next application startup
+    participant Help as JFTPHelp2 and JavaHelp
+    User->>UI: Open Preferences and choose locale
+    alt Save validates
+        UI->>Pref: Apply and request save
+        Note over UI,Pref: Current screens are not rebuilt by locale save
+        Boot->>Pref: Load saved values
+        Boot->>Boot: Apply locale before constructing UI
+    else Cancel
+        UI->>UI: Close without dialog save path
+    end
+    User->>UI: Select help topic
+    UI->>Help: Request mapped packaged topic
+    Note over UI,Help: Missing resources or launch failures are not verified away

@@ -1,0 +1,12 @@
+flowchart TD
+    Settings["⚙️ Connection settings and preferences"] --> Session["Active session"]
+    Favorites["Favorite definitions on disk"] --> Settings
+    Session --> Protocol["FTP requests and file bytes"]
+    Protocol <-->|Network| Server["Configured server"]
+    Session <-->|Local file bytes| Disk["Local filesystem"]
+    Session --> UI["Listing, progress and messages"]
+    Stores["Configured certificate collections"] --> Trust["Key and trust decisions"]
+    Trust --> Protocol
+    Disk --> Temp["Temporary copy and monitor association"]
+    Temp --> Approval["User approves edit-back"]
+    Approval --> Protocol

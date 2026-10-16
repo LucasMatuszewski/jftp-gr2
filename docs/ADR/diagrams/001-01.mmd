@@ -1,0 +1,15 @@
+flowchart TD
+    Bootstrap["⚙️ Bootstrap locale and appearance"] --> Frame["JFTP frame"]
+    Frame --> Actions["Menus and toolbar actions"]
+    Frame --> Tabs["Session tabs"]
+    Actions --> Dialogs["Connection, preferences and file dialogs"]
+    Tabs --> Session["Selected FTPSession"]
+    Session --> Panes["Local and remote tables"]
+    Session --> Status["Message area and progress"]
+    Bundles["Property bundles and images"] --> Frame
+    Bundles --> Dialogs
+    Help["Packaged JavaHelp resources"] --> Broker["JFTPHelp2 / HelpBroker"]
+    Actions --> Broker
+    Frame -->|Window open when enabled| Updater["AutoUpdater"]
+    Actions -->|Check Now| Updater
+    Updater --> Endpoint["Historical HTTP metadata endpoint"]

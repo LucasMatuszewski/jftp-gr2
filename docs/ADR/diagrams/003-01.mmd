@@ -1,0 +1,11 @@
+flowchart TD
+    Host["⚙️ RemoteHost configuration"] --> Session["FTPSession"]
+    Session --> Reflection["Configured class names"]
+    Reflection --> Client["External FTPClient"]
+    Reflection --> Parser["External ListParser"]
+    Session --> Context["JFTPSSLContext"]
+    Context --> Managers["Key and trust managers"]
+    Managers --> Client
+    Client <-->|FTP or configured FTPS| Server["Local or remote server"]
+    Client --> Events["Progress and messages"]
+    Parser --> Listings["Remote file entries"]

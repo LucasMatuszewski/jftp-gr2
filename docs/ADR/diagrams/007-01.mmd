@@ -1,0 +1,11 @@
+flowchart TD
+    Source["⚙️ Unchanged application source"] --> Suites["Four JUnit 3 suites"]
+    Synthetic["Isolated synthetic home and files"] --> Suites
+    Suites --> Child["StateProbe in a later JVM"]
+    Suites --> Reports["Surefire results and historical logs"]
+    Child --> Reports
+    Native["Real native desktop and local services"] --> Manual["Manual and E2E outcomes"]
+    Docs["ADRs, diagrams and citations"] --> DocCheck["Links, hashes, parser and render validation"]
+    Reports --> Evidence["Scoped evidence, no automatic promotion"]
+    Manual --> Evidence
+    DocCheck --> Evidence

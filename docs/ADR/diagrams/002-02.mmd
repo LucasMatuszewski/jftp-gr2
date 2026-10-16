@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Caller as ⚙️ Frame or user action
+    participant Session as FTPSession
+    participant Worker as Listing worker
+    participant Disk as Local filesystem
+    participant EDT as Event dispatch queue
+    Caller->>Session: Request local location
+    Session->>Worker: Start listing
+    Session-->>Caller: Request returns before listing completion
+    Worker->>Disk: Collect filtered entries
+    alt Normal return or handled failure
+        Worker->>EDT: Queue finished
+        EDT->>Session: Apply listing and reset state
+    else Unchecked failure escapes
+        Note over Worker,EDT: Finished is not guaranteed to be queued
+    end

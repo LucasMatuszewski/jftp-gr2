@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant Suite as ⚙️ Persistence suite and writer JVM
+    participant Disk as Synthetic profile
+    participant Reader as Later JVM
+    Suite->>Suite: Isolate synthetic home before app initialization
+    Suite->>Disk: Persist configured state in test process
+    Suite->>Reader: Start separate process on same synthetic profile
+    Reader->>Disk: Load saved state
+    Reader-->>Suite: Report observed values
+    Suite->>Suite: Assert values and process outcome
+    Note over Suite,Reader: Historical automated pattern, not a new run or native GUI test
