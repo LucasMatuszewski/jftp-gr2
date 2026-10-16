@@ -8,7 +8,7 @@ Use these pull requests and branches as course checkpoints:
 
 | Update | Pull request | Branch | What changed |
 | --- | --- | --- | --- |
-| Documentation baseline and modernization plan | [Find this branch’s PR](https://github.com/LucasMatuszewski/jftp-gr2/pulls?q=is%3Apr+head%3Acodex%2Fmodernization-roadmap) | [codex/modernization-roadmap](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/modernization-roadmap) | Current-functionality PRD, retrospective architectural decisions, and a proposed staged modernization roadmap. |
+| Documentation baseline and modernization plan | [PR #2](https://github.com/LucasMatuszewski/jftp-gr2/pull/2) | [codex/modernization-roadmap](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/modernization-roadmap) | Current-functionality PRD, retrospective architectural decisions, and a proposed staged modernization roadmap. |
 | Sygnity visual refresh | [PR #1](https://github.com/LucasMatuszewski/jftp-gr2/pull/1) | [codex/sygnity-ui-refresh](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/sygnity-ui-refresh) | Sygnity branding, light surfaces, cyan accents, spacing and flatter borders, with existing workflows preserved as the acceptance requirement. |
 
 For the documentation checkpoint, start with the [current-functionality PRD](docs/PRD.md), [architecture baseline](docs/ADR/000-main-architecture.md), [proposed modernization ADR](docs/ADR/008-modernization-roadmap.md), and [technology/UI research](docs/research/jftp-modernization-2026-10-16.md). The roadmap proposes Java/build/test upgrades, separation of application logic, and a qualified FTP-library replacement. Swing and existing saved-data formats remain the initial constraints; a UI-library replacement is not decided.
