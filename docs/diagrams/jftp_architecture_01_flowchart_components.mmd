@@ -1,0 +1,26 @@
+flowchart TD
+    User["👤 Desktop user"] --> Frame["🖥️ JFTP frame<br/>menus, toolbar and session tabs"]
+    subgraph App["jFTP application in one JVM"]
+        Frame --> Session["⚙️ FTPSession<br/>session state and operations"]
+        Session --> Panes["🖥️ LocalPane / RemotePane<br/>StatusWindow / StatusBar"]
+        Session --> Worker["⚙️ Custom SwingWorker<br/>construct on worker; finished on EDT"]
+        Session --> Local["📁 LocalFile and file filters"]
+        Frame -.-> Persistence["💾 Preferences / FavoritesManager<br/>KeyStoreManager"]
+        Session --> TLS["🔐 JFTPSSLContext<br/>key and trust managers"]
+        Panes --> Resources["📦 ResourceLoader and JFTPUtil<br/>localized bundles and images"]
+        Frame --> Help["📖 JFTPHelp2"]
+    end
+    Worker --> API["🔌 External ftpapi 3.0.0<br/>FTPClient and ListParser"]
+    TLS --> API
+    API <-->|"FTP / configured FTPS"| Server["🌐 Remote FTP server"]
+    Local <-->|"list and transfer files"| Disk["📁 Local filesystem"]
+    Persistence <-->|"serialized data and JKS"| Disk
+    Help --> JavaHelp["📖 External JavaHelp 2.0.05<br/>packaged helpset resources"]
+    classDef ui fill:#DBEAFE,stroke:#1E3A8A,color:#172554
+    classDef core fill:#DCFCE7,stroke:#166534,color:#052E16
+    classDef external fill:#F3E8FF,stroke:#6B21A8,color:#3B0764
+    classDef data fill:#FEF3C7,stroke:#92400E,color:#451A03
+    class User,Frame,Panes ui
+    class Session,Worker,Local,Persistence,TLS,Resources,Help core
+    class API,Server,JavaHelp external
+    class Disk data

@@ -174,3 +174,10 @@ choice. The current version of JFTP bundles the following language packs:
 * English
 * Chinese (Traditional) 
 * German 
+
+Architecture documentation
+--------------------------
+
+See the [source-checked architecture diagrams](docs/design/jftp-architecture-2026-10-15.md)
+for components, startup, connection, transfers and persistence, including scope
+and verification limits.

@@ -1,0 +1,38 @@
+sequenceDiagram
+    participant Caller as 🖥️ ConnectAction / FavoritesDlg / reconnect
+    participant Session as FTPSession
+    participant Worker as ⚙️ Connection worker construct()
+    participant API as 🔌 External FTPClient / ListParser
+    participant TLS as 🔐 JFTPSSLContext
+    participant UI as 🖥️ finished() on EDT
+    Note over Caller,Session: Scenario starts disconnected<br/>existing connections use a separate asynchronous disconnect worker
+    Caller->>Session: connect(RemoteHost)
+    Session->>Session: store host, set busy and connection status
+    Session-->>Worker: new custom SwingWorker().start()
+    Worker->>API: Class.forName(host client/parser names).newInstance()
+    Worker->>API: configure parser, passive mode, timeout, buffer and SSL flags
+    opt SSL usage is enabled
+        Worker->>TLS: getSSLContext(frame, hostName)
+        TLS-->>Worker: SSLContext with JFTP key/trust managers
+        Worker->>API: setSSLContext(context)
+    end
+    Worker->>API: register control, data and FTP listeners
+    Worker->>API: connect(host, normal or implicit SSL port), then login(user, password, account)
+    alt connect and login return normally
+        Worker->>API: execute configured commands in order
+        opt initial remote directory is nonempty
+            Worker->>API: setWorkingDirectory(parser-created RemoteFile)
+        end
+        Worker->>API: getWorkingDirectory(), then list(remoteFileFilter)
+        API-->>Worker: directory and listing
+    else FTPException during connect or login
+        Worker->>Session: ftpException(error)
+        Worker->>API: disconnect()
+        Worker->>Session: clear client reference
+    end
+    Note over Worker,API: Outer catches handle reflection, configuration, command and listing failures<br/>Handler or log, no explicit disconnect or client clear on these paths
+    Worker-->>UI: custom SwingWorker posts finished via invokeLater
+    opt client reference exists and isConnected()
+        UI->>Session: remotePane.setData(directory, listing), updateTitle()
+    end
+    UI->>Session: reset status, clear busy, request asynchronous initial local listing

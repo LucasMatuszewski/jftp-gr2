@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-15",
+  "source_revision": "efa2596e7a0522ba0cc9d2439b7702e30a0b5524",
+  "reviewer": "gpt-6-luna",
+  "review": "Original-source review before drafts; second source review of all five drafts; corrections integrated by primary agent.",
+  "scope": "Static architecture documentation; no application source changes or new runtime verification.",
+  "source_sha256": {
+    "pom.xml": "5746084f899edba87754df13e992964db0810d3893feeadf4cad54461eb473bb",
+    "src/main/java/com/myjavaworld/jftp/JFTPApplication.java": "a917c338b788b34890fdf8747e35862ff5abf3ca62aa3230fefa23c6c1d13e0a",
+    "src/main/java/com/myjavaworld/jftp/JFTP.java": "845ae223525ea119e310178201fa0f5010fc13888fa27d12d6c18e1cf108350b",
+    "src/main/java/com/myjavaworld/jftp/FTPSession.java": "7ceb1617ec403a910846bb859cf335e5264646f9dbe6cec4611399e07f27243a",
+    "src/main/java/com/myjavaworld/jftp/RemoteHost.java": "451d94d3e00274b95e0f7275aaca463d9bbac9f8d989d0640f950acc6ef5bd37",
+    "src/main/java/com/myjavaworld/gui/SwingWorker.java": "7af6d4940056dfd7cb13663695cc23888c18a4dccbb1fd1f349629eae4ef8ac4",
+    "src/main/java/com/myjavaworld/util/FileChangeMonitor.java": "23dd8aca7f66d6027cdadd07efb82b271f3131a2e26588f2acf104f7d7f0bbee",
+    "src/main/java/com/myjavaworld/jftp/actions/ConnectAction.java": "1c6d72787d08f8a9096dff14d50bad8853bcb9b3be9b5d9c5c9270c576fc868f",
+    "src/main/java/com/myjavaworld/jftp/FavoritesDlg.java": "6af5844028d74575fcb4fc9320629c98347aa74cb61f70a82c547db781d4f137",
+    "src/main/java/com/myjavaworld/jftp/actions/DownloadAction.java": "1bb7e4eb38ac7e74bca79f274b1513e09c842a0baec70900ca9f256f28dde9a0",
+    "src/main/java/com/myjavaworld/jftp/actions/UploadAction.java": "6e17c73a7cf61f9a79c27ddd47f4efefd50e2958ae222d625726cee67d2dcc1b",
+    "src/main/java/com/myjavaworld/jftp/actions/AbortAction.java": "abbcced8f22417bdf10f21e09b9f5f6adeaea0bf4b9c7ca6c4e114771da93ca9",
+    "src/main/java/com/myjavaworld/jftp/FavoritesManager.java": "c50d233ee0488c87df61defaa9440b5eb76f5e71bfa404329a68edfdf5baa126",
+    "src/main/java/com/myjavaworld/jftp/JFTPPreferences.java": "b94fb2d1eabfcd7484979a88e926717d9b046c6b9c91f4fb18e0caad3dbc2347",
+    "src/main/java/com/myjavaworld/jftp/ssl/KeyStoreManager.java": "b31467500e6ca1c282b3b8009352e91ad9c3ee6193f12ed181be8ba0d458448d",
+    "src/main/java/com/myjavaworld/jftp/ssl/JFTPSSLContext.java": "5dd20e780d671faf24efc80807bdae4e74aedf4a56b68895b5925c34bbea2729",
+    "src/main/java/com/myjavaworld/jftp/ssl/JFTPKeyManager.java": "f8493ba16eb23fd6e3209a575928fa7d4eb681d88de0c8215eac70c0a8add1bb",
+    "src/main/java/com/myjavaworld/jftp/ssl/JFTPTrustManager.java": "11f0a81044f6bb02c0d778732d3ad36b65eec6cb9c63c7d0a5a87e73e226d77a",
+    "src/main/java/com/myjavaworld/util/ResourceLoader.java": "987cea071f2044eddf460cf41a9688c406cf291548f144db3651688c70637dee",
+    "src/main/java/com/myjavaworld/jftp/JFTPHelp2.java": "d5ad0986c9e36adf8f782ef9b1889f7c55d7cc121815dbad12a70e743503a79e",
+    "src/main/java/com/myjavaworld/jftp/HelpMenu.java": "1b00c7167fc65f9ffa01483cd125ea41cb8d3453910c54c1989abb26f1694727"
+  },
+  "artifact_sha256": {
+    "docs/diagrams/jftp_architecture_01_flowchart_components.mmd": "fc291d4f2382158dcdc1307b571cffa23243b02fe3c43d60e060794e21e6be3d",
+    "docs/diagrams/jftp_architecture_02_sequence_startup.mmd": "c166377288dcf03ad6cefd3b1c04a63cf452a3030784242554f7768d8d543eb0",
+    "docs/diagrams/jftp_architecture_03_sequence_connection.mmd": "2df02da6f52c306ecc6d476b0d73a68abf000143f8af51910ba9923fb93e411d",
+    "docs/diagrams/jftp_architecture_04_flowchart_transfers.mmd": "fd6bf5a3e4e8729253c8b9186592664a0b2e4fc87dc13a0f199924dee5db2672",
+    "docs/diagrams/jftp_architecture_05_flowchart_persistence.mmd": "5d5c4e2dd881018065b84a04208a02583712381e2f92856bbc88f2f467eb9175",
+    "docs/diagrams/jftp_architecture_01_flowchart_components.svg": "256a74f5e729ea736fc2e56ec29d7399d5ad1cf37ebf120e644108a80146722a",
+    "docs/diagrams/jftp_architecture_02_sequence_startup.svg": "81644379d61bd45c1bef3fec08b6cffbf069c2c091dcbc21ae203753a598424b",
+    "docs/diagrams/jftp_architecture_03_sequence_connection.svg": "f653b370cb721faf01a91918eb3d33dbe7cbf7faec795d72fb0efc0bce4c3eea",
+    "docs/diagrams/jftp_architecture_04_flowchart_transfers.svg": "292659a8dc247be3b693cabc2e3cb106a591828b9795a234c98d004b4e0aa243",
+    "docs/diagrams/jftp_architecture_05_flowchart_persistence.svg": "61b733150a4ea0b84870c6f73dd6e4abbd8400abebe9070d8ac3b08cbe25fb45",
+    "docs/diagrams/jftp-architecture.theme.json": "a01826f7fa0144af5e2db03ba631fe63f4073d7456807712133facbcec0e80de"
+  },
+  "validation": {
+    "mermaid": "12.2.0",
+    "mermaid_cli": "12.0.0",
+    "node": "24.13.1",
+    "syntax_parsed": 5,
+    "svg_rendered": 5,
+    "png_preview_rendered": 5,
+    "svg_xml_parsed": 5,
+    "fenced_blocks_match": 5,
+    "local_links_checked": 43,
+    "source_hashes_checked": 21,
+    "artifact_hashes_checked": 11,
+    "png_previews_inspected": 5,
+    "sequence_semicolon_regression_checked": 2
+  },
+  "review_evidence": [
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/JFTPApplication.java",
+      "line": 62,
+      "quote": "jftp.newSession();",
+      "observed": "Startup creates the first session after showing the frame."
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/gui/SwingWorker.java",
+      "line": 141,
+      "quote": "SwingUtilities.invokeLater(doFinished);",
+      "observed": "Completion is posted to the EDT after normal construct return."
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "line": 605,
+      "quote": "disconnect();",
+      "observed": "Existing-connection path requests an asynchronous disconnect without awaiting it."
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/actions/AbortAction.java",
+      "line": 59,
+      "quote": "session.setAbortFlag(true);",
+      "observed": "Abort requests combine session state and a separate protocol-abort worker."
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/FavoritesManager.java",
+      "line": 129,
+      "quote": "out.writeObject(so);",
+      "observed": "Favorite save can persist a sealed object."
+    },
+    {
+      "path": "src/main/java/com/myjavaworld/jftp/ssl/KeyStoreManager.java",
+      "line": 172,
+      "quote": "KeyStore keyStore = KeyStore.getInstance(\"JKS\");",
+      "observed": "Certificate store format is JKS."
+    }
+  ]
+}

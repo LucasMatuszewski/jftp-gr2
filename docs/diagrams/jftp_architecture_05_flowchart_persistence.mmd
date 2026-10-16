@@ -1,0 +1,19 @@
+flowchart TD
+    Paths["📁 JFTP class initialization<br/>USER_HOME = JVM user.home<br/>DATA_HOME = USER_HOME/.jftp/data"]
+    Paths --> PrefFile[("💾 preferences.ser")]
+    Paths --> FavFile[("💾 favorites.ser")]
+    PrefOps["⚙️ JFTP.loadPreferences / savePreferences"] <-->|"Java object serialization"| PrefFile
+    PrefOps <--> Prefs["⚙️ JFTPPreferences<br/>UI, connection and store settings"]
+    FavOps["⚙️ FavoritesManager<br/>list of RemoteHost objects"] <-->|"AES SealedObject when available<br/>plain list fallback; legacy read rewrites"| FavFile
+    Prefs -->|"configured paths and passwords"| Stores["🔐 KeyStoreManager<br/>lazy load; save on add/delete"]
+    Stores <-->|"JKS"| ServerStore[("💾 Server certificate store<br/>default serverCertificates.jks")]
+    Stores <-->|"JKS"| ClientStore[("💾 Client certificate store<br/>default clientCertificates.jks")]
+    Trust["🔐 JFTPTrustManager"] -->|"check stored server trust"| Stores
+    Key["🔐 JFTPKeyManager<br/>delegates to X509KeyManager"] -->|"initialize KeyManagerFactory<br/>from client store and password"| Stores
+    Trust -->|"date, host or trust check fails"| Warning["🖥️ SecurityWarningDlg<br/>user decision"]
+    classDef core fill:#DCFCE7,stroke:#166534,color:#052E16
+    classDef store fill:#FEF3C7,stroke:#92400E,color:#451A03
+    classDef ui fill:#DBEAFE,stroke:#1E3A8A,color:#172554
+    class Paths,PrefOps,Prefs,FavOps,Stores,Trust,Key core
+    class PrefFile,FavFile,ServerStore,ClientStore store
+    class Warning ui

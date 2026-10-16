@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant JVM as ⚙️ JVM main thread
+    participant App as JFTPApplication
+    participant Frame as 🖥️ JFTP
+    participant Store as 💾 preferences.ser
+    participant Session as FTPSession
+    participant UI as 🖥️ Session panes
+    JVM->>App: main → new JFTPApplication()
+    App->>Frame: first access to JFTP.prefs
+    Note over Frame,Store: JFTP class initialization<br/>paths snapshot user.home
+    Frame->>Store: loadPreferences(), create defaults if absent
+    Store-->>Frame: JFTPPreferences
+    Frame->>Frame: initialize transfer types and proxy settings
+    App->>App: set locale and Swing look and feel
+    App->>Frame: new JFTP()
+    Frame->>Frame: construct menus, toolbar and tabs
+    App->>Frame: setVisible(true)
+    App->>Frame: newSession()
+    Frame->>Session: new FTPSession(this)
+    Session->>UI: construct local/remote panes and status views
+    Session->>Session: request initial local directory listing on a worker
+    Session->>Session: construct file monitor and register listener
+    Note over Session,UI: Local listing publishes later on EDT<br/>monitor timer starts only when a file is added
+    Session-->>Frame: session panel
+    Frame->>Frame: add and select session tab
+    Note over JVM,UI: main does not explicitly schedule startup on the EDT

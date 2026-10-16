@@ -1,0 +1,24 @@
+flowchart TD
+    Action["🖥️ DownloadAction / UploadAction"] --> Gate{"Connected and selection nonempty?"}
+    Gate -->|No| Return["Return without starting a transfer"]
+    Gate -->|Yes| Start["⚙️ Snapshot selection; abort = false<br/>set busy; start custom SwingWorker"]
+    Start --> Next{"Next selected item and<br/>connected and not aborted?"}
+    Next -->|Yes| Recursive["📁 Recursive download / upload<br/>guard connection and abort flag"]
+    Recursive --> Kind{"File or directory?"}
+    Kind -->|File| Transfer["🔌 client.download / client.upload<br/>choose transfer type; update status"]
+    Kind -->|Directory| Directory["📁 Create destination directory<br/>list filtered children; recurse"]
+    Transfer -->|"return after success or handled error"| Next
+    Directory --> Next
+    Next -->|No| Listing["📁 Attempt destination listing even after loop break<br/>local after download; remote after upload"]
+    Listing --> Finish["🖥️ finished() on EDT<br/>refresh destination pane; clear busy"]
+    Abort["🖥️ AbortAction"] -.->|"setAbortFlag(true)"| Next
+    Abort -.->|"separate worker"| ProtocolAbort["🔌 client.abort()"]
+    ProtocolAbort -.-> Transfer
+    classDef ui fill:#DBEAFE,stroke:#1E3A8A,color:#172554
+    classDef operation fill:#DCFCE7,stroke:#166534,color:#052E16
+    classDef decision fill:#FEF3C7,stroke:#92400E,color:#451A03
+    classDef cancel fill:#FEE2E2,stroke:#991B1B,color:#450A0A
+    class Action,Finish ui
+    class Return,Start,Recursive,Transfer,Directory,Listing operation
+    class Gate,Next,Kind decision
+    class Abort,ProtocolAbort cancel
