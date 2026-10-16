@@ -23,7 +23,7 @@
       "source": "EdukeyTeam/agent-toolbox",
       "sourceType": "github",
       "skillPath": "skills/legacy-codebase-workflows/SKILL.md",
-      "computedHash": "3525c345a550c14e96a8a28e042d6a2a3f797d1f81a9f83121e0c5a40994a07d"
+      "computedHash": "f5a52144b39620471573308478f9e93c9086dbc2c22022500c0ac7ab7ba33e1c"
     },
     "respond-to-code-review": {
       "source": "EdukeyTeam/agent-toolbox",
