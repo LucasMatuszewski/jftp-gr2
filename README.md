@@ -1,21 +1,18 @@
 JFTP - The Universal FTP Client
 ===============================
 
-Course updates
---------------
+Course update — documentation and modernization plan
+----------------------------------------------------
 
-Use these pull requests and branches as course checkpoints:
+The repository now includes the following reference materials for course participants:
 
-| Update | Pull request | Branch | What changed |
-| --- | --- | --- | --- |
-| Documentation baseline and modernization plan | [PR #2](https://github.com/LucasMatuszewski/jftp-gr2/pull/2) | [codex/modernization-roadmap](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/modernization-roadmap) | Current-functionality PRD, retrospective architectural decisions, and a proposed staged modernization roadmap. |
-| Sygnity visual refresh | [PR #1](https://github.com/LucasMatuszewski/jftp-gr2/pull/1) | [codex/sygnity-ui-refresh](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/sygnity-ui-refresh) | Sygnity branding, light surfaces, cyan accents, spacing and flatter borders, with existing workflows preserved as the acceptance requirement. |
+- **Product requirements:** the [PRD](docs/PRD.md) describes existing functionality, user stories and acceptance criteria. It was reviewed alongside the architectural decisions and updated where the source audit clarified current behavior.
+- **Architecture and decisions:** the [architecture baseline and ADRs](docs/ADR/000-main-architecture.md) document the existing technology, responsibilities, constraints and verification gaps.
+- **Modernization plan:** the [proposed roadmap](docs/ADR/008-modernization-roadmap.md) and [technology/UI research](docs/research/jftp-modernization-2026-10-16.md) describe staged Java, build, test and library modernization while preserving existing use cases. These are proposals for discussion; modernization has not been implemented.
+- **Code navigation:** [RepoMaps](docs/repo-maps/README.md), [full and compressed Repomix packs](docs/RepoMix/README.md), and the [code graph](docs/code-graph/README.md) provide complementary views of the application.
+- **Diagrams and history:** the [source-checked architecture diagrams](docs/design/jftp-architecture-2026-10-15.md), [architecture sketch](docs/code-graph/architecture.md), ADR diagrams and [context snapshots](docs/context-snapshots/README.md) support analysis and comparison as the application evolves.
 
-For the documentation checkpoint, start with the [current-functionality PRD](docs/PRD.md), [architecture baseline](docs/ADR/000-main-architecture.md), [proposed modernization ADR](docs/ADR/008-modernization-roadmap.md), and [technology/UI research](docs/research/jftp-modernization-2026-10-16.md). The roadmap proposes Java/build/test upgrades, separation of application logic, and a qualified FTP-library replacement. Swing and existing saved-data formats remain the initial constraints; a UI-library replacement is not decided.
-
-The documentation already landed on master: [product baseline](https://github.com/LucasMatuszewski/jftp-gr2/commit/b5e7657bac97ae567533d74ae487e5ae713379c8), [architecture baseline](https://github.com/LucasMatuszewski/jftp-gr2/commit/469ecd58fe268dc759c91905c25ddcabf8782c8d), [certificate-description correction](https://github.com/LucasMatuszewski/jftp-gr2/commit/284ab9fa6a54bf060e2f006baea724d3db5cf845), [modernization proposal](https://github.com/LucasMatuszewski/jftp-gr2/commit/8cec56fe7083ba71784528f8988c3f9ae234f8e8). This PR adds the course navigation above; it does not implement the proposed modernization.
-
-For visual before/after screenshots and verification details, see the [visual-refresh report on its branch](https://github.com/LucasMatuszewski/jftp-gr2/blob/codex/sygnity-ui-refresh/docs/sygnity-ui-refresh.md). Each PR records its own scope and verification; a proposal or an open PR is not evidence that a change is merged.
+The separate **visual update** is available in [PR #1](https://github.com/LucasMatuszewski/jftp-gr2/pull/1), on branch [codex/sygnity-ui-refresh](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/sygnity-ui-refresh). It introduces Sygnity branding, light surfaces, cyan accents, spacing and flatter borders. See the [visual-refresh report](https://github.com/LucasMatuszewski/jftp-gr2/blob/codex/sygnity-ui-refresh/docs/sygnity-ui-refresh.md) for before/after screenshots and verification details.
 
 Introduction
 ------------
