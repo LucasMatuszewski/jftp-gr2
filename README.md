@@ -191,3 +191,9 @@ and exercise changes. `Upstream` preserves the original project at commit
 `14e62ceba4e371c2a0b955604b10f065f46f4f7d`; keep development commits on `master`.
 The `upstream` remote points to [sai-pullabhotla/jftp](https://github.com/sai-pullabhotla/jftp).
 The preserved `Upstream` branch is also published to `origin`.
+
+Codex dependency security hook
+------------------------------
+
+See the [Maven dependency security gate](.codex/hooks/README.md) for POM change
+review, activation through `/hooks`, verification and coverage limits.

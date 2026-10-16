@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["role", "status", "summary", "checked_at", "sources", "findings"],
+  "properties": {
+    "role": {"type": "string", "enum": ["vulnerabilities", "supply-chain"]},
+    "status": {"type": "string", "enum": ["allow", "block", "unknown"]},
+    "summary": {"type": "string"},
+    "checked_at": {"type": "string"},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "coordinate", "risk", "advisory_ids", "introduced_by_change", "recommendation", "urls"],
+        "properties": {
+          "severity": {"type": "string", "enum": ["info", "low", "medium", "high", "critical"]},
+          "coordinate": {"type": "string"},
+          "risk": {"type": "string"},
+          "advisory_ids": {"type": "array", "items": {"type": "string"}},
+          "introduced_by_change": {"type": "boolean"},
+          "recommendation": {"type": "string"},
+          "urls": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}
