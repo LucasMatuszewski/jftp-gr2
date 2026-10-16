@@ -1,5 +1,7 @@
 # JFTP repository maps
 
+> **Original reference snapshot — do not regenerate in place.** These existing generated outputs are preserved in the [immutable original snapshot](../context-snapshots/original-initial-context/README.md). Follow the [versioned refresh workflow](../context-snapshots/workflow.md) after major application changes; publish a new change-labelled set instead of replacing these files. Historical refresh commands below use fixed destinations and must not be run against the original outputs.
+
 Snapshot of `cdc95025ac74098f129bfd9cdcd613fa6348c8d0`, refreshed on 2026-10-15 from the working tree. These reports navigate original source; they do not prove runtime behavior.
 
 | Report | Captured definitions included | Raw map estimate | Annotated report estimate | Generation |
@@ -27,7 +29,7 @@ The Windows sandbox's repository trust is provided through Git environment confi
 
 [Shared provenance](../RepoMix/provenance.json) records the configuration, source encodings, original byte hashes, output hashes and measured generation times. Local raw maps, inventories, metadata, logs and regeneration helpers are under `artifacts/`. Only `artifacts/` is ignored; primary reports and this guide remain Git-visible. Scoped attributes preserve LF report bytes.
 
-## Refresh
+## Historical refresh recipe (do not run in place)
 
 Try the skill's `setup_native.py status` and pinned installation first. Use the returned verified native program when ready and label newly generated native reports accordingly. If native execution remains unavailable, use the isolated Python fallback. Do not install tooling into the application environment or stage generation inside this checkout.
 

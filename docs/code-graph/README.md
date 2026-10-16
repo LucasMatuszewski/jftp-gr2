@@ -1,5 +1,7 @@
 # JFTP graph for agent navigation
 
+> **Original reference snapshot — do not regenerate in place.** These existing generated outputs are preserved in the [immutable original snapshot](../context-snapshots/original-initial-context/README.md). Follow the [versioned refresh workflow](../context-snapshots/workflow.md) after major application changes; publish a new change-labelled set instead of replacing these files. Historical refresh commands below use fixed destinations and must not be run against the original outputs.
+
 Use [graph.py](graph.py) for bounded symbol, caller, callee and impact queries. It reads the portable [JFTP graph](jftp.graph.json) locally using Python's standard library. No Graphify installation, model endpoint, database service or MCP registration is needed for queries. Use the existing [RepoMap](../repo-maps/README.md) for orientation and [full-source Repomix](../RepoMix/README.md) for broader implementation context; verify original bodies before edits.
 
 The 2026-10-15 snapshot covers revision `cdc95025ac74098f129bfd9cdcd613fa6348c8d0`: 189 Java files, 2,372 nodes and 7,609 relationships, including 2,095 `calls` edges. Extraction and provenance capture took 9.810 seconds on this machine. Nodes include files, classes, methods and external placeholders; node count is not a count of Java definitions. The graph file is 3,301,974 bytes. These are local measurements, not comparative speed or token-savings claims.
@@ -7,7 +9,7 @@ The 2026-10-15 snapshot covers revision `cdc95025ac74098f129bfd9cdcd613fa6348c8d
 This is a working-tree snapshot made before the granular commits. The helper
 requires an exact match to its recorded `HEAD`, even when source hashes still
 match. Recording these changes therefore makes queries reject this snapshot;
-run the documented refresh and validation locally before querying the new HEAD.
+generate and validate a new change-labelled snapshot before querying the new HEAD; do not refresh this original reference in place.
 Committing a refreshed snapshot changes HEAD again and triggers the same guard.
 The snapshot's revision is retained as provenance rather than relabeled without
 regeneration.
@@ -44,7 +46,7 @@ All queries reject a changed Java file, added/deleted Java file, changed `pom.xm
 
 All 189 Java paths are represented, including three `package-info.java` files with no extracted symbols. `pom.xml` is staged and also yields no symbols. Extraction reported these four warnings; it did not report parser failures. File representation is not semantic completeness. Source resources, XML/properties wiring, dependency implementations, dynamic dispatch, reflection, OS integration and external consumers remain outside the graph's guarantees.
 
-## Refresh and verify
+## Historical refresh recipe (do not run in place)
 
 Graphify `graphifyy==0.9.91` generates the graph; queries do not require it. Refresh requires `uv`, Git and the provisioned cache. The explicit `provision` command downloads packages; it does not install an agent skill, hooks or client configuration.
 
@@ -71,9 +73,3 @@ Start with a bounded question and exact symbol. Inspect callers or a shallow imp
 See the [source-checked architecture sketch](architecture.md) and [open-source tool comparison](tool-comparison.md). For later Java API refactoring, evaluate JDT-backed navigation once the project and dependencies import correctly. The current AST graph is useful now but cannot certify overload resolution, virtual dispatch or safe deletion.
 
 Only `artifacts/` is ignored. Primary graph, evidence, provenance and helper files remain Git-visible, with scoped LF attributes. No persistent process, watcher, server, MCP entry, hook or AGENTS.md instruction was installed. The Beads bridge could not run because its WSL launch returned `Wsl/Service/E_ACCESSDENIED`; no shared issue was created or updated from this session.
-
-## Optional AGENTS.md pointer, prepared for separate approval
-
-The following wording is ready to add to repository guidance if Lucas approves that instruction edit:
-
-> For JFTP architecture, workflows, callers and change impact, start with `docs/code-graph/README.md`. Run `python -B docs/code-graph/graph.py find <symbol>` and bounded `callers`, `callees` or `impact` queries using an exact returned node ID. The saved graph covers Java source only and has known missing/incorrect edges; inspect `source_review` and original source. Queries reject stale Java/pom/revision fingerprints. Use `docs/repo-maps/README.md` for orientation and `docs/RepoMix/README.md` for broader source context. Refresh and revalidate after relevant changes; never infer dead code from missing graph edges.

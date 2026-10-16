@@ -1,5 +1,7 @@
 # JFTP Repomix packs
 
+> **Original reference snapshot — do not regenerate in place.** These existing generated outputs are preserved in the [immutable original snapshot](../context-snapshots/original-initial-context/README.md). Follow the [versioned refresh workflow](../context-snapshots/workflow.md) after major application changes; publish a new change-labelled set instead of replacing these files. Historical refresh commands below use fixed destinations and must not be run against the original outputs.
+
 Two profiles are available: the original [full-code pack](jftp.full-no-comments.xml) and the [compressed structural pack](jftp.compressed-no-comments.xml), both with the same 466-file scope and supported-comment removal policy. See the [detailed comparison](COMPARISON.md) for measured sizes, precise losses, source examples, use-case suitability and context-budget analysis.
 
 | Pack | Bytes | Direct whole-file `o200k_base` tokens |
