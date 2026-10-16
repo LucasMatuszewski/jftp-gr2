@@ -3,11 +3,11 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": ".*",
+        "matcher": "^(apply_patch|Edit|Write|Bash|exec_command|shell|shell_command|mcp__.*)$",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -c \"import runpy,subprocess; root=subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip(); runpy.run_path(root+'/.codex/hooks/launch.py',run_name='__main__')\"",
+            "command": "python3 -c \"from pathlib import Path; import runpy; root=next(p for p in (Path.cwd(),*Path.cwd().parents) if (p/'.git').exists()); runpy.run_path(str(root/'.codex/hooks/launch.py'),run_name='__main__')\"",
             "timeout": 540,
             "statusMessage": "Checking POM changes and dependency security"
           }

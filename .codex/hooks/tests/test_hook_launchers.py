@@ -4,9 +4,12 @@ import contextlib
 import importlib.util
 import io
 import os
+import os
 from pathlib import Path
 import shutil
 import subprocess
+import types
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -17,13 +20,33 @@ BASH = Path("C:/Program Files/Git/bin/bash.exe") if os.name == "nt" else shutil.
 
 
 class LauncherTests(unittest.TestCase):
+    def test_candidate_invokes_preview_backend_once(self):
+        # Unit process double counts backend invocations; no endpoint is mocked.
+        with tempfile.TemporaryDirectory() as directory:
+            stub = Path(directory) / "backend.sh"
+            log = Path(directory) / "calls.log"
+            stub.write_text('python3() {\n'
+                            '  printf "backend\\n" >> "$JFTP_BACKEND_CALL_LOG"\n'
+                            '  if [[ " $* " == *" --classify "* ]]; then printf "inspect\\n"; else cat >/dev/null; fi\n'
+                            '}\n', encoding="utf-8", newline="\n")
+            environment = os.environ.copy()
+            environment.update(BASH_ENV=stub.as_posix(), JFTP_BACKEND_CALL_LOG=log.as_posix())
+            payload = json.dumps({"hook_event_name": "PreToolUse", "cwd": str(ROOT),
+                                  "tool_name": "Write", "tool_input": {"file_path": "pom.xml", "content": "<project/>"}})
+            result = subprocess.run([str(BASH), str(SCRIPT)], input=payload, text=True, capture_output=True,
+                                    cwd=ROOT, env=environment, timeout=30)
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertEqual(["backend"], log.read_text(encoding="utf-8").splitlines())
+
     def test_bootstrap_failures_are_explicit_denials(self):
         spec = importlib.util.spec_from_file_location("pom_launch", SCRIPT.with_name("launch.py"))
         launch = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(launch)
         for failure in (OSError("synthetic spawn failure"), subprocess.TimeoutExpired("bash", 515)):
             output = io.StringIO()
-            with patch.object(launch.subprocess, "run", side_effect=failure), contextlib.redirect_stdout(output), contextlib.redirect_stderr(io.StringIO()):
+            event = json.dumps({"hook_event_name": "PreToolUse", "cwd": str(ROOT), "tool_name": "Bash",
+                                "tool_input": {"command": "echo bad > pom.xml"}}).encode()
+            with patch.object(launch.sys, "stdin", types.SimpleNamespace(buffer=io.BytesIO(event))), patch.object(launch.subprocess, "run", side_effect=failure), contextlib.redirect_stdout(output), contextlib.redirect_stderr(io.StringIO()):
                 code = launch.main()
             self.assertEqual(0, code)
             self.assertEqual("deny", json.loads(output.getvalue())["hookSpecificOutput"]["permissionDecision"])
@@ -52,7 +75,7 @@ class LauncherTests(unittest.TestCase):
         completed = self.invoke("Bash", {"command": "echo never-run > pom.xml"})
         self.assertEqual(0, completed.returncode, completed.stderr)
         self.assertEqual("deny", json.loads(completed.stdout)["hookSpecificOutput"]["permissionDecision"])
-        self.assertIn("apply_patch", completed.stderr)
+        self.assertIn("apply_patch", json.loads(completed.stdout)["hookSpecificOutput"]["permissionDecisionReason"])
 
     def test_invalid_json_blocks(self):
         completed = subprocess.run([str(BASH), str(SCRIPT)], input="not JSON", text=True,

@@ -34,12 +34,35 @@ and carries the patch in `tool_input.command`. Shell/unified-exec events are nam
 handlers; the Claude example cannot be copied as an executable Codex agent hook.
 The documented configuration does not provide Claude's example `if` selector.
 
-The matcher covers tools broadly so that MCP POM writes are not silently omitted.
-`pom-security.sh` reads the JSON, invokes the Python preview classifier, and uses
-an `if` to start reviewers only for a semantic POM change. Paths resolve from the
-session working directory and must remain inside this checkout, including symlinks.
-The configured Python bootstrap resolves from the Git root, including sessions
-in subfolders. `launch.py` forwards stdin to Bash without shell interpolation.
+The matcher selects file edits (`apply_patch`, `Edit`, `Write`), shell tools
+(`Bash` plus explicit shell-name aliases), and MCP tools. Planning, agent-launch
+and other unrelated local function calls do not start this hook. MCP names stay
+broad because their naming does not reliably identify filesystem writers.
+
+Before starting Bash, `launch.py` decodes the event and checks:
+
+```python
+if not should_inspect(event):
+    return 0
+```
+
+This input-only filter checks edit/write paths, patch operation and move paths,
+shell commands and MCP arguments. It skips unrelated edits even if their text
+mentions `pom.xml`, and permits the same small set of simple POM reads as the
+full validator. Malformed input is denied; ambiguous POM candidates reach the
+full validator. Shared shell/path helpers keep both layers consistent.
+
+The common skip path starts no Bash, full preview helper or Codex process and
+reads no application files or prompts. The bootstrap finds the checkout's `.git`
+marker (directory or worktree file) in the working directory or an ancestor,
+without spawning Git. It still starts Python for tool calls selected by the
+matcher: Codex has no argument-level declarative `if` that avoids that startup.
+
+For a candidate, `launch.py` forwards the original stdin bytes to Bash without
+shell interpolation. `pom-security.sh` invokes the full validator once; it no
+longer starts a separate classifier process and repeats the same preview. Only
+a semantic POM change starts reviewers. Paths resolve from the session working
+directory and must remain inside this checkout, including symlinks.
 
 The preview supports explicit `apply_patch` add/update/delete/move operations,
 multiple POMs, exact unambiguous hunks, and direct `Edit`/`Write` JSON shapes.
@@ -94,6 +117,8 @@ denied when their result cannot be previewed; submit an `apply_patch` instead.
 A small allowlist permits simple `cat`, `Get-Content`, `type` and `git diff --`
 reads without pipes, redirection or command substitution. Unknown MCP schemas
 mentioning `pom.xml` are denied; even MCP reads may need a simple shell read.
+If a new local function tool can mutate files, add its name to the matcher;
+unrecognized local function tools are no longer selected by a wildcard.
 
 This hook is a review guard, not filesystem isolation or a complete dependency
 scanner. An arbitrary script that hides a POM write without mentioning the file,
@@ -128,6 +153,7 @@ python -B .codex/hooks/tests/live_smoke.py removal
 python -B .codex/hooks/tests/inspect_hooks.py
 python -B .codex/hooks/tests/native_smoke.py
 python -B .codex/hooks/tests/native_smoke.py --case risky
+python -B .codex/hooks/tests/benchmark_hook.py --samples 9 --output "$env:TEMP\jftp-pom-performance.json"
 ```
 
 These create synthetic POMs in a temporary test subdirectory and remove them.
@@ -146,6 +172,8 @@ test accepts `--reviewed-hook`. It bypasses trust for that test thread only,
 refuses to run if another hook is discovered, and does not persist a trust
 decision. Normal activation still uses `/hooks`; changing the definition requires
 reviewing its new hash. Reviewers themselves never bypass trust or sandboxing.
+The native test also requires exactly one Bash launch across the unrelated
+baseline command and the POM candidate, verifying the early exit on the real path.
 See [verification.md](verification.md) for observed results and limitations.
 
 ## Documentation consulted

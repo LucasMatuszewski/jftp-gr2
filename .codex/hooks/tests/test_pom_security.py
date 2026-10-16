@@ -3,12 +3,14 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import sys
 import unittest
 from unittest.mock import patch
 import subprocess
 
 
 MODULE = Path(__file__).resolve().parents[1] / "pom_security.py"
+sys.path.insert(0, str(MODULE.parent))
 spec = importlib.util.spec_from_file_location("pom_security", MODULE)
 guard = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(guard)
@@ -119,6 +121,7 @@ class PomGateTests(unittest.TestCase):
     def test_unpreviewable_shell_and_mcp_pom_writes_are_blocked(self):
         for tool, data in [("Bash", {"command": "python change.py pom.xml"}),
                            ("Bash", {"command": "mvn versions:set -DnewVersion=2"}),
+                           ("Bash", {"command": "mvn -f build.xml validate"}),
                            ("Bash", {"command": "Set-Content POM.XML 'bad'"}),
                            ("mcp__fs__write_file", {"path": "pom.xml", "content": pom("2.0")})]:
             with self.subTest(tool=tool, data=data):

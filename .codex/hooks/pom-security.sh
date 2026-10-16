@@ -25,14 +25,10 @@ else
 fi
 
 payload="$(cat)" || block 'Cannot read hook input.'
-# This is the parameter-based filter: only previewable, semantic POM changes
-# start the security agents. Invalid/unpreviewable edits emit a JSON denial.
-if action="$(printf '%s' "$payload" | "$python_cmd" -B "$hook_dir/pom_security.py" --classify)"; then
-  if [[ "$action" == inspect ]]; then
-    printf '%s' "$payload" | "$python_cmd" -B "$hook_dir/pom_security.py" || block 'Audit process failed.'
-  elif [[ "$action" != ignore ]]; then
-    block 'Invalid classifier response.'
-  fi
+# launch.py has already filtered unrelated inputs before starting Bash.
+# Preview once; the validator starts agents only for a semantic POM change.
+if [[ -n "$payload" ]]; then
+  printf '%s' "$payload" | "$python_cmd" -B "$hook_dir/pom_security.py" || block 'Audit process failed.'
 else
-  block 'POM preview failed; submit an explicit apply_patch change.'
+  block 'Hook input is empty.'
 fi

@@ -16,12 +16,12 @@ import sys
 import tempfile
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
+from launch import MAX_BYTES, SHELL_TOOLS, is_pom, shell_candidate, simple_read
 
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 ROLES = ("vulnerabilities", "supply-chain")
-MAX_BYTES = 1024 * 1024
 REVIEW_TIMEOUT = 240
 
 
@@ -60,13 +60,11 @@ def prepare(event, root):
                 raise Block("Edit context is missing or ambiguous; use an explicit apply_patch edit.")
             after = before.replace(old, require_string(data, "new_string"), -1 if data.get("replace_all") else 1)
         return make_change(path, path, before, after, root)
-    if tool in ("Bash", "exec_command", "shell", "shell_command"):
+    if tool in SHELL_TOOLS:
         command = data.get("command", data.get("cmd"))
         if not isinstance(command, str):
             raise Block("Cannot inspect this shell invocation.")
-        mentions_pom = bool(re.search(r"pom\.xml", command, re.I))
-        changes_maven = bool(re.search(r"\b(?:versions|release):|\b(?:flatten|moditect):|\b(?:mvn|mvnw)(?:\.cmd)?\b.*\b(?:-f|--file)\b", command, re.I))
-        if (mentions_pom or changes_maven) and not simple_read(command):
+        if shell_candidate(command) and not simple_read(command):
             raise Block("POM-related shell command cannot be previewed safely. Submit the dependency change with apply_patch for security review.")
         return []
     # MCP schemas vary: never infer a complete file edit from an unknown shape.
@@ -82,10 +80,6 @@ def require_string(data, field):
     return value
 
 
-def is_pom(name):
-    return name.replace("\\", "/").rsplit("/", 1)[-1].lower() == "pom.xml"
-
-
 def safe_path(name, cwd, root):
     path = (cwd / name).resolve()
     if not path.is_relative_to(root):
@@ -99,16 +93,6 @@ def read_text(path):
     if path.stat().st_size > MAX_BYTES:
         raise Block("POM is too large to review safely.")
     return path.read_text(encoding="utf-8-sig")
-
-
-def simple_read(command):
-    # Deliberately small allowlist, not a shell parser or a security boundary.
-    if re.search(r"[;|&<>`$\r\n]", command):
-        return False
-    return bool(re.fullmatch(
-        r"\s*(?:(?:cat|Get-Content|type)\s+(?:--\s+)?[\w./\\:\- ]*pom\.xml|"
-        r"git\s+diff(?:\s+--(?:stat|numstat|name-only|cached))*\s+--\s+[\w./\\:\- ]*pom\.xml)\s*",
-        command, re.I))
 
 
 def xml_shape(text):

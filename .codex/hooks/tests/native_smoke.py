@@ -74,7 +74,7 @@ with AppServer(environment=environment, evidence=evidence) as server:
                 active_hooks.discard(run["id"])
                 if run["status"] == "blocked":
                     text = json.dumps(message)
-                    if options.case == "shell" and "POM security gate could not preview or audit this call" in text:
+                    if options.case == "shell" and "POM-related shell command cannot be previewed safely" in text:
                         denied = True
                     if options.case == "risky" and any(label in text for label in ("critical risk", "high risk")):
                         denied = True
@@ -94,4 +94,6 @@ with AppServer(environment=environment, evidence=evidence) as server:
             raise SystemExit("FAIL: no native completed hook with the expected denial")
         if not baseline:
             raise SystemExit("FAIL: the unrelated shell command was not allowed")
+        if len((evidence / "hook-launch.log").read_text(encoding="utf-8").splitlines()) != 1:
+            raise SystemExit("FAIL: unrelated shell call started Bash, or the candidate was launched repeatedly")
         print(f"PASS: native PreToolUse allowed a normal command and denied {options.case} POM change")
