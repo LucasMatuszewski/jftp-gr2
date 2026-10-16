@@ -1,7 +1,7 @@
 # Minimal Windows startup verification
 
 2026-10-15, working copy based on `cdc95025ac74098f129bfd9cdcd613fa6348c8d0`.
-Scope: [PRD](PRD.md). **Compilation and all 26 behavior tests pass. The real
+Scope: [historical startup PRD](https://github.com/LucasMatuszewski/jftp-gr2/blob/dd05dd443efd3151e0d0085eca7e356566ad0bda/docs/PRD.md). **Compilation and all 26 behavior tests pass. The real
 desktop window starts. Full native/manual desktop QA is still incomplete.**
 
 ## Minimal change

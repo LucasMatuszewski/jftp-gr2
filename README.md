@@ -125,8 +125,8 @@ JFTP's certificate manger, you can -
 
 JFTP allows you to store the connection parameters for the FTP sites that you 
 frequently work with. With JFTP, connecting to your favorite FTP site is just 
-one click away! In addition, for added security, JFTP stores all your favorite 
-site definitions in encrypted format.
+one click away! Favorite definitions use encryption when it is available; the
+current save implementation also includes an unencrypted fallback.
 
 ###Remote File Tasks
 
@@ -174,6 +174,15 @@ choice. The current version of JFTP bundles the following language packs:
 * English
 * Chinese (Traditional) 
 * German 
+
+Product requirements baseline
+-----------------------------
+
+See the [current-functionality PRD](docs/PRD.md) for existing user flows, stories,
+acceptance criteria and limitations. Its [evidence and consistency audit](docs/product/current-behavior-evidence.md)
+distinguishes historical execution, source-confirmed behavior and unverified
+outcomes. Historical platform and security claims above are not current support
+certification. Future change PRDs can reference the stable story and criterion IDs.
 
 Architecture documentation
 --------------------------

@@ -59,6 +59,6 @@ were checked directly against the original source for the 2026-10-15 exercise:
   Neither adapter is part of the Windows startup flow
   ([JFTPApplication.java](../../src/main/java/com/myjavaworld/jftp/JFTPApplication.java#L33)).
 
-See [the agreed scope](../PRD.md) and [startup verification](../minimal-startup.md)
+See [the historical startup scope](https://github.com/LucasMatuszewski/jftp-gr2/blob/dd05dd443efd3151e0d0085eca7e356566ad0bda/docs/PRD.md) and [startup verification](../minimal-startup.md)
 for current results. Protocol transfer correctness and a complete concurrency
 model are not established by this architecture view.
