@@ -1,6 +1,19 @@
 JFTP - The Universal FTP Client
 ===============================
 
+Course update — documentation and modernization plan
+----------------------------------------------------
+
+The repository now includes the following reference materials for course participants:
+
+- **Product requirements:** the [PRD](docs/PRD.md) describes existing functionality, user stories and acceptance criteria. It was reviewed alongside the architectural decisions and updated where the source audit clarified current behavior.
+- **Architecture and decisions:** the [architecture baseline and ADRs](docs/ADR/000-main-architecture.md) document the existing technology, responsibilities, constraints and verification gaps.
+- **Modernization plan:** the [proposed roadmap](docs/ADR/008-modernization-roadmap.md) and [technology/UI research](docs/research/jftp-modernization-2026-10-16.md) describe staged Java, build, test and library modernization while preserving existing use cases. These are proposals for discussion; modernization has not been implemented.
+- **Code navigation:** [RepoMaps](docs/repo-maps/README.md), [full and compressed Repomix packs](docs/RepoMix/README.md), and the [code graph](docs/code-graph/README.md) provide complementary views of the application.
+- **Diagrams and history:** the [source-checked architecture diagrams](docs/design/jftp-architecture-2026-10-15.md), [architecture sketch](docs/code-graph/architecture.md), ADR diagrams and [context snapshots](docs/context-snapshots/README.md) support analysis and comparison as the application evolves.
+
+The separate **visual update** is available in [PR #1](https://github.com/LucasMatuszewski/jftp-gr2/pull/1), on branch [codex/sygnity-ui-refresh](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/sygnity-ui-refresh). It introduces Sygnity branding, light surfaces, cyan accents, spacing and flatter borders. See the [visual-refresh report](https://github.com/LucasMatuszewski/jftp-gr2/blob/codex/sygnity-ui-refresh/docs/sygnity-ui-refresh.md) for before/after screenshots and verification details.
+
 Introduction
 ------------
 
