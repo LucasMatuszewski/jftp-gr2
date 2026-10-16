@@ -181,3 +181,13 @@ Architecture documentation
 See the [source-checked architecture diagrams](docs/design/jftp-architecture-2026-10-15.md)
 for components, startup, connection, transfers and persistence, including scope
 and verification limits.
+
+Development repository and branches
+-----------------------------------
+
+The development repository is [LucasMatuszewski/jftp-gr2](https://github.com/LucasMatuszewski/jftp-gr2).
+Local `master` tracks `origin/master` and contains the application development
+and exercise changes. `Upstream` preserves the original project at commit
+`14e62ceba4e371c2a0b955604b10f065f46f4f7d`; keep development commits on `master`.
+The `upstream` remote points to [sai-pullabhotla/jftp](https://github.com/sai-pullabhotla/jftp).
+The preserved `Upstream` branch is also published to `origin`.
