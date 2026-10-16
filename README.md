@@ -1,6 +1,22 @@
 JFTP - The Universal FTP Client
 ===============================
 
+Course updates
+--------------
+
+Use these pull requests and branches as course checkpoints:
+
+| Update | Pull request | Branch | What changed |
+| --- | --- | --- | --- |
+| Documentation baseline and modernization plan | [Find this branch’s PR](https://github.com/LucasMatuszewski/jftp-gr2/pulls?q=is%3Apr+head%3Acodex%2Fmodernization-roadmap) | [codex/modernization-roadmap](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/modernization-roadmap) | Current-functionality PRD, retrospective architectural decisions, and a proposed staged modernization roadmap. |
+| Sygnity visual refresh | [PR #1](https://github.com/LucasMatuszewski/jftp-gr2/pull/1) | [codex/sygnity-ui-refresh](https://github.com/LucasMatuszewski/jftp-gr2/tree/codex/sygnity-ui-refresh) | Sygnity branding, light surfaces, cyan accents, spacing and flatter borders, with existing workflows preserved as the acceptance requirement. |
+
+For the documentation checkpoint, start with the [current-functionality PRD](docs/PRD.md), [architecture baseline](docs/ADR/000-main-architecture.md), [proposed modernization ADR](docs/ADR/008-modernization-roadmap.md), and [technology/UI research](docs/research/jftp-modernization-2026-10-16.md). The roadmap proposes Java/build/test upgrades, separation of application logic, and a qualified FTP-library replacement. Swing and existing saved-data formats remain the initial constraints; a UI-library replacement is not decided.
+
+The documentation already landed on master: [product baseline](https://github.com/LucasMatuszewski/jftp-gr2/commit/b5e7657bac97ae567533d74ae487e5ae713379c8), [architecture baseline](https://github.com/LucasMatuszewski/jftp-gr2/commit/469ecd58fe268dc759c91905c25ddcabf8782c8d), [certificate-description correction](https://github.com/LucasMatuszewski/jftp-gr2/commit/284ab9fa6a54bf060e2f006baea724d3db5cf845), [modernization proposal](https://github.com/LucasMatuszewski/jftp-gr2/commit/8cec56fe7083ba71784528f8988c3f9ae234f8e8). This PR adds the course navigation above; it does not implement the proposed modernization.
+
+For visual before/after screenshots and verification details, see the [visual-refresh report on its branch](https://github.com/LucasMatuszewski/jftp-gr2/blob/codex/sygnity-ui-refresh/docs/sygnity-ui-refresh.md). Each PR records its own scope and verification; a proposal or an open PR is not evidence that a change is merged.
+
 Introduction
 ------------
 
