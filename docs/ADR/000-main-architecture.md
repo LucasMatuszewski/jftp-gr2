@@ -14,6 +14,8 @@ Accepted means that this records the existing architecture. It does not approve 
 
 This ADR set records jFTP's existing desktop architecture for the 21 stories and 12 flows in the PRD. The seven focused records separate decisions that can be revisited independently. It specifies no replacement architecture.
 
+The separate [ADR-008 modernization proposal](008-modernization-roadmap.md) is for discussion. It does not supersede these observed decisions or authorize implementation. Source-audit corrections to the existing certificate contracts are recorded in ADR-003/004 and PRD 1.1.
+
 | Record | Technical boundary | PRD coverage |
 | --- | --- | --- |
 | [001](001-desktop-ui-and-resources.md) | Swing workspace, localization, images, JavaHelp and information views | F01, F03, F09, F12 |

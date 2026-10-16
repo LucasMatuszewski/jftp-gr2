@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant QA as Future real-service verification
+    participant Legacy as Legacy adapter
+    participant Server as Real local server and files
+    participant New as Candidate adapter
+    QA->>Server: Create synthetic fixture state
+    QA->>Legacy: Execute defined scenario
+    Legacy->>Server: Real protocol and file operations
+    QA->>Server: Capture replies and inspect actual contents
+    QA->>Server: Reset the real fixture to the same initial state
+    QA->>New: Execute corresponding scenario
+    New->>Server: Real protocol and file operations
+    QA->>Server: Inspect actual contents and outcome
+    QA->>QA: Compare intended AC and legacy observations
+    Note over QA,New: Untested profiles keep their legacy provider

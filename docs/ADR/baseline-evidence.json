@@ -151,8 +151,8 @@
   ],
   "document_sha256_normalized_lf": {
     "AGENTS.md": "e8afa2cdabd253fe1218c3fabec3bf06e8c0ffeb9580fd81af6090bc52210730",
-    "README.md": "e08a45433db425f41f1dd71960334babbd064e8e98e4ad886cbc3ae17096a460",
-    "docs/ADR/000-main-architecture.md": "9c5bd278bcd3add3ecf316916fad82b5d1f23a955018ff8c56a2e9562211953c",
+    "README.md": "45c8e47fa86752540a76f50030fdd9e9cc29f6e23139b86877d194f50ef284d7",
+    "docs/ADR/000-main-architecture.md": "d2e76a82ed66b1aa0d9c48a6402878619869b75951e0346858e44765cc30b7cc",
     "docs/ADR/001-desktop-ui-and-resources.md": "e8f127feb05902b5825347195b2b5bbf40d9ccb3eaf89b29f694df2d541d8370",
     "docs/ADR/002-sessions-and-concurrency.md": "e81e0a6763e340ab1841f6dcb430fa6b3a5516838296ec573516280c0c164313",
     "docs/ADR/003-ftp-and-ftps-integration.md": "602481e5fd75a22cb8bf7339be05cb8582dda3ac77af0a6f83aa99652e2106d2",

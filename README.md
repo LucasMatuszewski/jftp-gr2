@@ -198,6 +198,11 @@ it does not recommend retaining every choice during modernization. Future
 decisions update the affected record and its dated history, with earlier text
 preserved in Git.
 
+The [proposed modernization roadmap](docs/ADR/008-modernization-roadmap.md) and
+[research report](docs/research/jftp-modernization-2026-10-16.md) compare current
+technology alternatives and map intentional fixes to PRD criteria. These are
+proposals for discussion, not implemented or accepted replacement decisions.
+
 Development repository and branches
 -----------------------------------
 

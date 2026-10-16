@@ -1,0 +1,10 @@
+flowchart TD
+    Saved["💾 Existing preferences, favorites and JKS"] --> LegacyRead["Legacy reader and model shapes"]
+    LegacyRead --> Mapping["Explicit value and identifier mapping"]
+    Mapping --> Request["Application operation request"]
+    Request --> Adapter["Selected qualified adapter"]
+    Adapter --> Result["Typed result and progress"]
+    Result --> UI["Existing localized Swing view"]
+    UI --> Edit["Approved settings edits"]
+    Edit --> LegacyWrite["Compatible legacy writer"]
+    LegacyWrite --> Saved

@@ -1,0 +1,18 @@
+flowchart TD
+    User["👤 Existing desktop user"] --> Swing["Swing view adapter — phase one"]
+    Future["Optional future UI adapter — not selected"] -.-> Core["Application services and session lifecycle"]
+    Swing --> Core
+    Core --> Model["Application-owned values and results"]
+    Core --> FTPPort["Protocol port"]
+    Core --> StatePort["Legacy state boundary"]
+    Core --> FilePort["File, ZIP and Desktop ports"]
+    FTPPort --> Legacy["Existing ftpapi adapter — initially active"]
+    FTPPort -.-> Candidate["Commons Net candidate — parity gated"]
+    Legacy --> Server["Authorized FTP or FTPS server"]
+    Candidate --> Server
+    StatePort --> Stores["Existing serialized data and JKS"]
+    FilePort --> Disk["Filesystem and associated desktop apps"]
+    Core --> Dispatch["Current-generation UI delivery"]
+    Dispatch --> Swing
+    classDef proposed fill:#DBEAFE,stroke:#1E3A8A,color:#172554
+    class Core,FTPPort,StatePort,FilePort proposed

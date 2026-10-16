@@ -1,0 +1,26 @@
+sequenceDiagram
+    actor User as 👤 User
+    participant UI as Swing adapter
+    participant Core as Session service
+    participant Task as Owned operation handle
+    participant FTP as Protocol adapter
+    User->>UI: Submit operation
+    UI->>Core: Request with current generation
+    alt Another protocol operation admitted
+        Core-->>UI: Explicit busy outcome
+    else Request admitted
+        Core->>Task: Execute outside EDT
+        Task->>FTP: Perform protocol request
+        FTP-->>Core: Progress for this operation
+        Core-->>UI: Dispatch current-generation update on EDT
+        opt User requests cancel or close
+            UI->>Core: Cancel active handle
+            Core->>Task: Request tested I/O teardown
+            Note over Task,FTP: Do not queue cancellation<br/>behind the blocked request
+        end
+        Task-->>Core: Completion, failure or cancellation outcome
+        Core-->>UI: Apply only if generation remains current
+    end
+    opt Approved reconnect fix
+        Core->>Core: Complete teardown before admitting<br/>a new connection generation
+    end

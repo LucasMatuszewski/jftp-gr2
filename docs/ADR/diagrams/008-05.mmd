@@ -1,0 +1,13 @@
+flowchart TD
+    Baseline["📋 P0: real baseline and coverage gaps"] --> Build["P1: stable build, Java 25 and unchanged-function qualification"]
+    Build --> Tests["P1b: separate Jupiter migration"]
+    Tests --> Core["P2: extract one application boundary at a time"]
+    Core --> Provider["P3: qualify and cut over supported protocol profiles"]
+    Core --> UIResearch["P4: optional UI prototype comparison"]
+    Baseline --> FixReview["Separate B-register fix approvals and behavioral Red tests"]
+    FixReview --> Fixes["Small isolated fixes when prerequisites pass"]
+    Provider --> Preserve["Retain old provider for every unqualified profile"]
+    UIResearch --> UIDecision{"Measured benefit and full flow parity?"}
+    UIDecision -->|No| Keep["Keep Swing"]
+    UIDecision -->|Yes, group accepts| Migrate["Incremental UI migration"]
+    Core --> Later["P5: optional storage migration, bundling and other platforms"]

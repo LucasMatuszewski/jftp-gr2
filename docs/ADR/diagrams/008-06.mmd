@@ -1,0 +1,13 @@
+flowchart TD
+    Boundary["🖥️ Stable toolkit-neutral core"] --> Baseline["Measure and exercise current Swing workflows"]
+    Baseline --> Small["Optional Swing plus FlatLaf experiment"]
+    Baseline --> FX["JavaFX representative-flow prototype"]
+    Baseline --> Other["SWT or Compose only with a concrete reason"]
+    Small --> Compare["Compare all required functions, native UX and measured costs"]
+    FX --> Compare
+    Other --> Compare
+    Compare --> Decision{"Approve a UI change?"}
+    Decision -->|No| Retain["Retain current UI"]
+    Decision -->|Yes| One["Migrate one workspace or flow with rollback"]
+    One --> Verify["Real server, native QA, locales and saved-state checks"]
+    Verify --> Next["Continue only after that flow passes"]
