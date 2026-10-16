@@ -49,7 +49,8 @@
     "src/main/java/com/myjavaworld/jftp/StatusBar.java": "4159d2522c3c821565a44ebbd2e65dd69be622238ba9149cec05de3c05b7e4da",
     "src/main/java/com/myjavaworld/jftp/StatusWindow.java": "17574011dc9978828ca4253c6e3d2d1601235bc8b2b7bda746667f1258a00bee",
     "src/main/java/com/myjavaworld/jftp/TransferModeMenu.java": "a1145fc5e5a8a849956daa1961c0e479a73e30b75ebec9bed12990cc2fdc662c",
-    "src/main/java/com/myjavaworld/jftp/TransferModesPrefsPanel.java": "b1c7e021ffafc649de7e5d9701370ffc2f1eacc5a5abee5c9b97cd394ee33fed"
+    "src/main/java/com/myjavaworld/jftp/TransferModesPrefsPanel.java": "b1c7e021ffafc649de7e5d9701370ffc2f1eacc5a5abee5c9b97cd394ee33fed",
+    "src/main/java/com/myjavaworld/jftp/ssl/CertificateDlg.java": "f2470e7c194e5470f18fce0ed899fa258d8f5bbe221bfe28a7689b343939ffd6"
   },
   "reused_architecture_manifest": "docs/design/jftp-architecture-2026-10-15.evidence.json",
   "reuse_checks": {
@@ -61,5 +62,14 @@
       "README.md"
     ],
     "source_diff_from_architecture_revision": "empty for src/main, src/tests and pom.xml"
-  }
+  },
+  "source_audit_corrections": [
+    {
+      "date": "2026-10-16",
+      "examined_revision": "469ecd58fe268dc759c91905c25ddcabf8782c8d",
+      "scope": "Source-only certificate UI/caller and server trust correction, baseline 1.1; no application changes or new execution proof.",
+      "source_hashes": 44,
+      "added_existing_acceptance_criterion": "AC-89"
+    }
+  ]
 }

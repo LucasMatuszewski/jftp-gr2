@@ -35,7 +35,9 @@ FavoritesManager reads/writes `favorites.ser`. Older plain-list input is accepte
 
 KeyStoreManager uses separately configured server/client JKS paths, with static in-process caches. Missing stores can be initialized and written empty. Add/delete mutate the cache before requesting save; a save failure can leave cache and disk different. Store exceptions reach callers, but some certificate deletion handlers only print errors to stderr. Paths can be outside the default data directory.
 
-JFTPTrustManager uses a manager initialized from the server store, additional date/host checks and a modal warning. Yes caches the chain in that manager instance. It does not import the certificate into the persistent server collection.
+JFTPTrustManager initializes an X509 manager from the server store and delegates checkClientTrusted to it. Its checkServerTrusted path instead uses custom checks: leaf validity, exact case-insensitive subject-CN matching and whether a chain certificate has a store alias. It does not call the delegate's checkServerTrusted and has no SAN/wildcard branch in the inspected host check. Yes caches the chain in that instance without importing it.
+
+The active CertificateManagerDlg has only the server tab; its client tab/builder are commented out. Client JKS path settings and key-manager use still exist. The warning's View action opens an installable CertificateDlg; Install requests adding the displayed chain and saving the server store separately from the later Yes/No choice. Save can fail. Ordinary manager details do not expose Install.
 
 ## 4. Data Structures
 
@@ -44,7 +46,7 @@ JFTPTrustManager uses a manager initialized from the server store, additional da
 | JFTPPreferences | Locale, UI values, paths, transfer mapping, ports/flags, proxy identity, password character arrays, update state | Java object graph across launches, static current aggregate. |
 | RemoteHost / Favorite | Named connection, integer ports, mode flags, commands, directory strings, password string | Serialized favorite list. Favorite names compare without case. |
 | Favorite list | List of saved connection definitions | Reader accepts old list or sealed object; raw-list model is not a schema validator. |
-| Server/client JKS | Alias and certificate entries, configured path/password | Disk files plus static caches. Existing certificate aliases can be replaced. |
+| Server/client JKS | Aliases, certificate entries, configured path/password; client JKS may also contain externally provisioned private-key entries | Disk files plus static caches. Existing certificate aliases can be replaced. The active UI imports certificate entries, not private keys. |
 | Accepted chain | Certificate chain reference | Trust-manager instance only, not durable import. |
 
 Fixed serialization identifiers exist, but compatibility beyond observed supported inputs and historical suites is not established. There is no database schema, transactional storage engine or automatic per-user credential protection.
@@ -57,8 +59,9 @@ Fixed serialization identifiers exist, but compatibility beyond observed support
 | Preference load | Existing bytes or first use | Saved values or defaults | Corrupt data can remain while defaults are returned. |
 | Favorite load | Legacy list or sealed favorite data | List of definitions | Legacy rewrite can itself fail; damaged stream errors propagate to UI handlers. |
 | Favorite save | Current list | Sealed or plain object stream | UI reports save failure but may still close/connect. |
-| Certificate add/delete | Collection, certificate/alias | Cached mutation followed by save attempt | Save failure has no cache rollback; some delete errors only reach stderr. |
-| Trust warning | Chain and failed check | Instance-level acceptance or exception | Acceptance is not persistent import. |
+| Certificate manager add/delete | Server collection and certificate/alias | Cached mutation followed by save attempt | Only server tab active; save failure has no cache rollback and some delete errors only reach stderr. |
+| Trust warning Yes/No | Chain and failed check | Instance-level acceptance or exception | Yes itself does not import a certificate. |
+| Warning certificate view Install | Displayed chain and explicit Install | Request persistent server-store import | Independent of the warning's later Yes/No; no automatic rollback on No. |
 
 ## 6. Technical Decisions
 
@@ -189,18 +192,27 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     actor User as 👤 User
-    participant Dialog as Certificate manager
+    participant Dialog as Server certificate manager
     participant Stores as Cached JKS manager
     participant Disk as Configured JKS file
     participant Trust as Trust-manager instance
+    participant Details as Warning certificate view
     User->>Dialog: Import or confirm deletion
-    Dialog->>Stores: Modify selected collection
+    Dialog->>Stores: Modify server collection
     Stores->>Disk: Attempt save after cache mutation
     Note over Stores,Disk: Save failure can leave cache and disk different<br/>Not every deletion error is shown in a dialog
     Trust->>Stores: Obtain trust collection
-    Trust->>Trust: Check chain, dates and host
+    Trust->>Trust: Custom leaf-validity,<br/>CN and alias checks
+    Note over Trust: No delegate server-chain<br/>validation call
     opt Check leads to warning
-        Trust-->>User: Show warning and certificate view
+        Trust-->>User: Show warning
+        opt User selects View Certificate
+            User->>Details: Inspect chain
+            opt User selects Install
+                Details->>Stores: Add chain to server collection
+                Stores->>Disk: Attempt persistent save
+            end
+        end
         alt User accepts
             Trust->>Trust: Cache accepted chain<br/>for this instance
             Note over Trust,Disk: This acceptance path<br/>does not import a certificate
@@ -220,7 +232,7 @@ Historical persistence suites cover favorites/preferences, synthetic first use, 
 | Corrupt/legacy data | Existing integration | Invalid streams or supported older list | Defaults vs error/rewrite as recorded | Historical behavior, not endorsed recovery. |
 | Write failure | Integration/native | Unwritable synthetic target | Actual error and later close/connect behavior recorded | Unexecuted guardrail. |
 | JKS changes | Integration/native | Synthetic certificates and temp collections | Import/details/delete and persisted state inspected | Missing/corrupt stores and alias replacement, unexecuted. |
-| Trust decision | Real local FTPS/native | Synthetic accepted/rejected chain | Instance acceptance vs persistent collection inspected | No mock E2E, unexecuted. |
+| Trust decision | Real local FTPS/native | Synthetic chain and Yes/No/View/Install | Transient Yes vs explicit persistent Install inspected | Install then No, failed save, no mock E2E; unexecuted. |
 
 ### Technical acceptance criteria
 
@@ -236,5 +248,6 @@ Source support: [PRD evidence E05, E13–15](../product/current-behavior-evidenc
 | Date | Change | Interpretation |
 | --- | --- | --- |
 | 2026-10-16 | Initial retrospective baseline. | Source observations and historical execution remain distinct. |
+| 2026-10-16 | Correct active certificate UI, warning Install and custom server-validation description. | Deeper source audit, not an architectural implementation change. |
 
 Future decisions update this file and add a dated history entry identifying changed decision IDs, rationale and affected PRD IDs. Git retains prior text; a new ADR number is not required merely to revise this area. No future architecture or test completion is implied by this baseline.

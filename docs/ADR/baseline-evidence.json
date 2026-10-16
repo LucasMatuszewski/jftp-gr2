@@ -71,7 +71,8 @@
     "src/test/java/com/myjavaworld/jftp/LocalFilteringTest.java": "8d1a8f6bc3725f9f2b034f3fbe4824010aa80b7cbae220c5059b11d705d0ea4e",
     "src/test/java/com/myjavaworld/jftp/PersistenceTestCase.java": "6db2b711b41e590701b5608f18542b1dfb24ca5c7b2ca3bd9ada73f28ce0cde3",
     "src/test/java/com/myjavaworld/jftp/PreferencesPersistenceTest.java": "b970c05d3213b8a1b60ae99838e83bdf260ef10387d10dc280294645a9c9431b",
-    "src/test/java/com/myjavaworld/jftp/StateProbe.java": "597205b159cb0d611fb9db7cfb4b051efa0bc3517afe086966a3da45e41eabb2"
+    "src/test/java/com/myjavaworld/jftp/StateProbe.java": "597205b159cb0d611fb9db7cfb4b051efa0bc3517afe086966a3da45e41eabb2",
+    "src/main/java/com/myjavaworld/jftp/ssl/CertificateDlg.java": "f2470e7c194e5470f18fce0ed899fa258d8f5bbe221bfe28a7689b343939ffd6"
   },
   "diagram_source_sha256": {
     "docs/ADR/diagrams/000-01.mmd": "eadf75f56777fed4190ec80b55b252abb01242be8caa362ca56782d36ea73c17",
@@ -90,7 +91,7 @@
     "docs/ADR/diagrams/004-01.mmd": "6cc4e9c8a5da481e82ceaa682579a5e6a2ed10a9cf39ee8ece50af4be980de98",
     "docs/ADR/diagrams/004-02.mmd": "0ae495bd14248221afed87ab88052fc5a0e3b128ffa1bc841fffe037f3a0be1e",
     "docs/ADR/diagrams/004-03.mmd": "14793891f965702431ada9fcc246ae821f56d0d940f5d3ef6959ea4738443a0a",
-    "docs/ADR/diagrams/004-04.mmd": "ada729e8f9cb3dca35648045617fad81018ba11a88bb77dff1e7a919c64741b2",
+    "docs/ADR/diagrams/004-04.mmd": "0ccef398400920a6fd9aa9fd55b000cbaffe85f099390c8fb324c8d9872cbcd2",
     "docs/ADR/diagrams/005-01.mmd": "6d1723e0a0afe88f00435ddd3fcaaadad157e18bdf25329e4bf4da75e5e95ba0",
     "docs/ADR/diagrams/005-02.mmd": "25a2279f371497d70fa2b1f57a05a5eaa76cb6cf5ad837fce0f3385469d72062",
     "docs/ADR/diagrams/005-03.mmd": "c3c0b118361acdca163a93ea2b3df3732d5bbc9f859d031fdab429d45f48a8bb",
@@ -154,11 +155,26 @@
     "docs/ADR/000-main-architecture.md": "9c5bd278bcd3add3ecf316916fad82b5d1f23a955018ff8c56a2e9562211953c",
     "docs/ADR/001-desktop-ui-and-resources.md": "e8f127feb05902b5825347195b2b5bbf40d9ccb3eaf89b29f694df2d541d8370",
     "docs/ADR/002-sessions-and-concurrency.md": "e81e0a6763e340ab1841f6dcb430fa6b3a5516838296ec573516280c0c164313",
-    "docs/ADR/003-ftp-and-ftps-integration.md": "95c65a9f6d1d2ad7bcdf1944eeb848d78926ae2db124f0466bb85a7c9fe9db1b",
-    "docs/ADR/004-persistent-state-and-certificates.md": "7e9ed6f7daef229ddf18e21b8beabf0f639d647a37c711bf50e5f14041cc84f9",
+    "docs/ADR/003-ftp-and-ftps-integration.md": "602481e5fd75a22cb8bf7339be05cb8582dda3ac77af0a6f83aa99652e2106d2",
+    "docs/ADR/004-persistent-state-and-certificates.md": "a000eb9aedee0cae408e06498fd90ba8f9cdb1bb675c799dec86d36effd9103e",
     "docs/ADR/005-files-archives-and-desktop-integration.md": "de117e142788f7289ac5db22b638b9e5739fcdfe22d10d36ed21ce323e452a4d",
     "docs/ADR/006-build-runtime-and-packaging.md": "2591f4a3a378f12fd7d3a5e57a8b9acf81f3cd349bf5ece127478999b5534508",
     "docs/ADR/007-verification-baseline.md": "b1f1582b7f845106454d32eda60129b3ede95b034c7dd478ca8c90488fc56372",
-    "docs/ADR/baseline-evidence.md": "9af59c577bf8660607323437a67490d4c87f33315c3402d2253fc5c19351cf1d"
-  }
+    "docs/ADR/baseline-evidence.md": "2b4c882fc18d355e160577b9ed68f3f2e450c503f741ed25be9df1f30f809f45"
+  },
+  "validation_scope": "Original 8-ADR validation record. Supplemental source-audit corrections and current fingerprints are recorded separately below; execution evidence is not rerun.",
+  "source_audit_corrections": [
+    {
+      "date": "2026-10-16",
+      "examined_revision": "469ecd58fe268dc759c91905c25ddcabf8782c8d",
+      "scope": "Server-only active certificate tab, warning View/Install distinct from transient Yes, no delegated server-chain validation; documentation correction only.",
+      "combined_source_hashes": 66,
+      "prd_source_hashes": 44,
+      "baseline_diagrams_parsed": 26,
+      "baseline_diagrams_rerendered": 1,
+      "unchanged_diagram_fingerprints": 25,
+      "visual_review": "Corrected 004-04 SVG inspected in contact sheet; no clipped viewport labels.",
+      "application_execution": "Not performed"
+    }
+  ]
 }

@@ -229,14 +229,23 @@ controls are not treated as available features.
 
 ### E15
 
-**Certificates/trust; AC-58–61, AC-73.**
+**Certificates/trust; AC-58–61, AC-73, AC-89.**
 [CertificateManagerDlg](../../src/main/java/com/myjavaworld/jftp/ssl/CertificateManagerDlg.java#L198)
-L198–355 wires selected-store X.509 import, details and confirmed deletion, with
-handled errors. [JFTPTrustManager](../../src/main/java/com/myjavaworld/jftp/ssl/JFTPTrustManager.java#L76)
-L76–99 checks trust/date/host failures, accepts a chain for that manager instance
-on Yes, and rejects other choices. [SecurityWarningDlg](../../src/main/java/com/myjavaworld/jftp/ssl/SecurityWarningDlg.java#L104)
-L104–123 offers inspection/decision. No unconditional secure-connection or permanent
-trust-store modification guarantee follows from these paths.
+L198–355 contains certificate operations. The deeper caller/wiring audit at
+[L368–372](../../src/main/java/com/myjavaworld/jftp/ssl/CertificateManagerDlg.java#L368)
+found only the server tab active; the client-tab add call and builder
+are commented out. Client JKS configuration/use is distinct from this UI.
+[JFTPTrustManager](../../src/main/java/com/myjavaworld/jftp/ssl/JFTPTrustManager.java#L76)
+L76–163 uses leaf-validity, exact subject-CN/host and store-alias checks on the
+server path; it does not call the initialized delegate's checkServerTrusted.
+Yes caches the chain for that manager instance; non-Yes fails the check.
+[SecurityWarningDlg](../../src/main/java/com/myjavaworld/jftp/ssl/SecurityWarningDlg.java#L104)
+L104–110 opens an installable
+[CertificateDlg](../../src/main/java/com/myjavaworld/jftp/ssl/CertificateDlg.java#L64).
+That dialog's L64–85 and L115–135 expose Install and request adding the chain to
+the server store. Install is persistent and separate from the warning's transient
+Yes, and the warning remains open afterward. No runtime/security certification is
+established. This corrects the original overbroad manager UI description.
 
 ### E16
 
@@ -306,3 +315,8 @@ dependency tree; no application/project dependency was added or changed.
 `git diff --cached --check` is the final whitespace check before committing the
 explicit documentation paths. No application build, tests or manual QA were
 rerun for this documentation-only change.
+
+The modernization source audit later corrected E15 and PRD baseline 1.1. The
+original 43 source fingerprints still match; CertificateDlg was added as a 44th
+explicit source reference. Historical execution results and original context
+snapshots were not refreshed or promoted to new runtime proof.

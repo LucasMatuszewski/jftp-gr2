@@ -31,6 +31,8 @@ RemoteHost contains client/parser implementation names. FTPSession constructs th
 
 Optional/explicit/implicit secure modes and data-channel encryption are configuration/wiring evidence. JFTPSSLContext supplies custom key/trust managers to the client. Successful FTPS negotiation, enabled protocol/cipher versions and server interoperability are not demonstrated.
 
+Expanded source review clarifies that the server trust path uses custom validity/CN/store-alias checks and does not call the initialized delegate's checkServerTrusted method. This is not evidence of standard PKIX chain/hostname validation; see ADR-004 for the separate transient Yes and persistent Install paths.
+
 Standard file actions snapshot selected entries, choose transfer type, process eligible directory children and request a destination refresh. Data/control/connection events feed messages/progress. Remote permissions are server-specific SITE CHMOD requests. Post-login commands and the interactive custom-command loop are distinct paths.
 
 ## 4. Data Structures
@@ -225,5 +227,6 @@ Source support: [PRD evidence E03, E06–08, E11, E15–16](../product/current-b
 | Date | Change | Interpretation |
 | --- | --- | --- |
 | 2026-10-16 | Initial retrospective baseline. | Source observations and historical execution remain distinct. |
+| 2026-10-16 | Clarify server trust validation from deeper source review. | Factual correction, no transport implementation change or new runtime evidence. |
 
 Future decisions update this file and add a dated history entry identifying changed decision IDs, rationale and affected PRD IDs. Git retains prior text; a new ADR number is not required merely to revise this area. No future architecture or test completion is implied by this baseline.

@@ -1,17 +1,26 @@
 sequenceDiagram
     actor User as 👤 User
-    participant Dialog as Certificate manager
+    participant Dialog as Server certificate manager
     participant Stores as Cached JKS manager
     participant Disk as Configured JKS file
     participant Trust as Trust-manager instance
+    participant Details as Warning certificate view
     User->>Dialog: Import or confirm deletion
-    Dialog->>Stores: Modify selected collection
+    Dialog->>Stores: Modify server collection
     Stores->>Disk: Attempt save after cache mutation
     Note over Stores,Disk: Save failure can leave cache and disk different<br/>Not every deletion error is shown in a dialog
     Trust->>Stores: Obtain trust collection
-    Trust->>Trust: Check chain, dates and host
+    Trust->>Trust: Custom leaf-validity,<br/>CN and alias checks
+    Note over Trust: No delegate server-chain<br/>validation call
     opt Check leads to warning
-        Trust-->>User: Show warning and certificate view
+        Trust-->>User: Show warning
+        opt User selects View Certificate
+            User->>Details: Inspect chain
+            opt User selects Install
+                Details->>Stores: Add chain to server collection
+                Stores->>Disk: Attempt persistent save
+            end
+        end
         alt User accepts
             Trust->>Trust: Cache accepted chain<br/>for this instance
             Note over Trust,Disk: This acceptance path<br/>does not import a certificate

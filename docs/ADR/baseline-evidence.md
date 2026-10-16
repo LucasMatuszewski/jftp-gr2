@@ -145,3 +145,22 @@ installed in the application or global environment. The tool dependency tree
 emitted a `whatwg-encoding@3.1.1` deprecation notice; no application dependency was
 added or changed. No Maven/application test command, desktop launch, real FTP or
 updater call was made, and no new runtime acceptance status is asserted.
+
+## Source-audit correction — 2026-10-16
+
+A deeper caller/wiring review at application revision
+`469ecd58fe268dc759c91905c25ddcabf8782c8d` corrected the certificate description
+in the PRD, its E15 evidence and ADR-003/004. Only the server manager tab is
+active; client-store configuration is separate. Warning Yes is transient,
+whereas View opens a separate Install path that requests persistent import.
+The custom server trust check does not invoke the initialized delegate's
+server-chain validation. These are documentation corrections, not application
+or security-policy changes. AC-89 records the previously omitted existing path.
+
+The original 65 combined source hashes still match; adding CertificateDlg makes
+66, including all 44 current PRD references. The updated certificate sequence
+was parsed, rerendered as SVG and visually reviewed. The other 25 baseline
+diagram sources match their earlier rendered fingerprints. The original
+26-diagram execution record above remains historical; the manifest records
+this supplemental audit separately. No application build, test or launch was
+performed and historical runtime evidence was not refreshed.

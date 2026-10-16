@@ -2,7 +2,7 @@
 
 **Type:** retrospective product baseline, not a new feature proposal.
 
-**Date:** 2026-10-16. **Baseline version:** 1.0.
+**Date:** 2026-10-16. **Baseline version:** 1.1 (source-audit corrections, no application changes).
 
 **Application revision examined:** `dbdc47608d031c287debaa9ba4f7d94665842239`.
 
@@ -123,11 +123,11 @@ These are available user paths. A step described here is not automatically an ex
 
 ### F10 — Manage certificates and answer trust warnings
 
-1. The user opens the certificate manager and chooses the server or client collection.
-2. The user imports a certificate, views details or confirms deletion.
+1. The user opens the certificate manager, whose active tab exposes the server certificate collection. The client-store path remains configurable through Preferences; its manager tab is not active.
+2. The user imports a server certificate, views details or confirms deletion.
 3. During a configured secure connection, failed date, host or trust checks can open a security warning.
-4. The user can inspect the certificate and accept or reject the warning.
-5. Acceptance permits that trust decision; it does not demonstrate permanent import. Rejection fails the trust check.
+4. The user can inspect the certificate and accept or reject the warning. This certificate view also offers Install, which requests saving the chain to the server certificate collection.
+5. Yes accepts the chain for the trust-manager instance without itself importing it. Install is a separate persistent action and is not undone by a later No in the warning. No fails the connection's trust check.
 
 ### F11 — Run custom commands and inspect messages
 
@@ -169,7 +169,7 @@ Identifiers are permanent references, not priority rankings. An available path d
 | US-16 | As a remote-content maintainer, I want to approve upload of edited temporary copies, so that I control sending changes back. | F07 | AC-45–46 |
 | US-17 | As a multi-site user, I want persistent named favorites, so that I can reuse site settings. | F08 | AC-47–52, AC-72, AC-86–87 |
 | US-18 | As a multi-site user, I want persistent preferences, so that I can reuse my choices. | F09 | AC-53–57 |
-| US-19 | As a secure-connection user, I want certificate management and a trust decision, so that I can inspect a certificate involved in a warning. | F10 | AC-58–61, AC-73 |
+| US-19 | As a secure-connection user, I want certificate management and a trust decision, so that I can inspect a certificate involved in a warning. | F10 | AC-58–61, AC-73, AC-89 |
 | US-20 | As a content maintainer, I want custom commands and session messages, so that I can perform supported site-specific tasks and inspect failures. | F11 | AC-62–64 |
 | US-21 | As a desktop user, I want help and application/update information, so that I can understand functions and inspect notices. | F12 | AC-65–66, AC-82, AC-88 |
 
@@ -301,10 +301,10 @@ These are retrospective criteria, not a declaration that every flow passed runti
 
 | ID | Single observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
-| AC-58 | Certificate management offers import into the selected client or server collection. | Source | E15 |
+| AC-58 | The active certificate manager offers import into the server certificate collection. | Source — corrected UI reachability | E15 |
 | AC-59 | Selecting a certificate permits viewing its details. | Source | E15 |
 | AC-60 | Rejecting a displayed trust warning fails that trust check. | Source | E15 |
-| AC-61 | Accepting a trust warning approves its certificate chain without performing permanent certificate import. | Source — acceptance only | E15 |
+| AC-61 | Choosing Yes in a trust warning approves its certificate chain without itself performing permanent certificate import. | Source — transient Yes decision | E15 |
 | AC-62 | Blank custom-command input keeps the dialog open with an error. | Source | E16 |
 | AC-63 | A command line whose uppercase form in the current locale begins immediately with LIST, NLST, RETR, STOR, STOU, APPE, PASV, PORT, DATA, CWD or CDUP is silently skipped. | Limitation | E16 |
 | AC-64 | The message area exposes normal, command, reply, error, status and information message categories. | Source | E07 |
@@ -313,6 +313,7 @@ These are retrospective criteria, not a declaration that every flow passed runti
 | AC-73 | Confirming certificate deletion requests removal of the selected certificate. | Source | E15 |
 | AC-82 | The platform-appropriate About entrypoint requests application information. | Source — window interaction unverified | E17 |
 | AC-88 | Check Now in update preferences requests an update check. | Source — service availability unverified | E17 |
+| AC-89 | Install in the certificate view opened from a trust warning requests adding the displayed chain to the server certificate collection. | Source — existing explicit install path | E15 |
 
 ### Unresolved acceptance boundaries
 
@@ -406,7 +407,7 @@ A category navigator selects Regional Settings, UI, Transfer Modes, General Conn
 
 ### Certificates and security warnings
 
-Certificate management separates client/server collections and offers import, details and confirmed deletion. Trust warnings describe a failed date/host/trust check, permit certificate inspection and request acceptance. Rejection fails the check; acceptance is not permanent-import confirmation.
+The active certificate manager displays the server collection and offers import, details and confirmed deletion. Client-store configuration exists in Preferences, but its manager tab is inactive. Trust warnings describe a failed date/host/trust check and offer inspection and Yes/No. Their certificate-details view additionally offers Install. Yes alone is transient; Install requests a persistent server-store change independently of the later warning decision.
 
 ### Commands, help and desktop handoff
 
@@ -502,3 +503,9 @@ flowchart TD
 ### Deferred decisions
 
 Gaps and limitations identify decisions for later work. They do not prescribe fixes, a security policy, recovery flows or technical solutions, or decide whether a legacy behavior should be preserved.
+
+### Baseline correction history
+
+| Date | Version | Correction |
+| --- | --- | --- |
+| 2026-10-16 | 1.1 | Deeper caller/wiring review established that the certificate manager's client tab is commented out and the warning certificate view has a separate Install action. AC-58/61 and F10/UI were clarified, and AC-89 records an existing omitted path. This is a documentation correction, not an implemented feature or newly executed acceptance test. |
