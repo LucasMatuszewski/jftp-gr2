@@ -1,0 +1,160 @@
+{
+  "revision": "cdc95025ac74098f129bfd9cdcd613fa6348c8d0",
+  "graph_sha256": "ba44405cc5e8ad253eda29b036f50f592e279c52f69746aa04310913dee99380",
+  "java_paths_represented": 189,
+  "relation_counts": {
+    "imports": 2127,
+    "contains": 235,
+    "inherits": 132,
+    "references": 1347,
+    "method": 1543,
+    "implements": 130,
+    "calls": 2095
+  },
+  "questions": [
+    {
+      "question": "Who calls FTPSession.connect(RemoteHost)?",
+      "result": "3 graph callers match the 3 inspected source call sites",
+      "edges": [
+        {
+          "source": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_reconnect",
+          "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+          "relation": "calls",
+          "context": "call",
+          "confidence": "EXTRACTED",
+          "source_file": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+          "source_location": "L703",
+          "weight": 1.0,
+          "_origin": "ast"
+        },
+        {
+          "source": "src_main_java_com_myjavaworld_jftp_favoritesdlg_favoritesdlg_connectbuttonpressed",
+          "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+          "relation": "calls",
+          "context": "call",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "src/main/java/com/myjavaworld/jftp/FavoritesDlg.java",
+          "source_location": "L249",
+          "weight": 1.0,
+          "_origin": "ast"
+        },
+        {
+          "source": "src_main_java_com_myjavaworld_jftp_actions_connectaction_connectaction_actionperformed",
+          "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+          "relation": "calls",
+          "context": "call",
+          "confidence": "INFERRED",
+          "confidence_score": 0.85,
+          "source_file": "src/main/java/com/myjavaworld/jftp/actions/ConnectAction.java",
+          "source_location": "L73",
+          "weight": 1.0,
+          "_origin": "ast"
+        }
+      ]
+    },
+    {
+      "question": "What changes if its signature changes?",
+      "result": "3 direct call sites require review; inbound depth-2 traversal is navigation only. External/reflection compatibility remains unknown."
+    },
+    {
+      "question": "Does GUI startup resolve completely?",
+      "result": "Partial",
+      "missing_call_site_lines": [
+        "L41",
+        "L55",
+        "L61"
+      ],
+      "source": "JFTPApplication.java",
+      "citations": [
+        "startup",
+        "new-session"
+      ]
+    },
+    {
+      "question": "Can zero incoming edges establish dead classes?",
+      "result": "No",
+      "ImageCellRenderer_incoming_calls": 0,
+      "citations": [
+        "renderer-favorites",
+        "renderer-preferences",
+        "thread-var",
+        "transferables"
+      ],
+      "scope": "All src/**/*.java extracted; named constructor sites inspected. Resources and reflection are outside graph scope. No dead-code conclusion."
+    },
+    {
+      "question": "Can the graph establish FTP library implementation and architecture?",
+      "result": "Partial architecture navigation; ftpapi internals absent",
+      "citations": [
+        "new-session",
+        "panes",
+        "worker",
+        "ftp-default",
+        "dependency"
+      ]
+    }
+  ],
+  "rejected_edges": [
+    {
+      "edge": {
+        "source": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+        "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_disconnect_object_swingworker_l1500",
+        "relation": "calls",
+        "context": "call",
+        "confidence": "EXTRACTED",
+        "source_file": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+        "source_location": "L617",
+        "weight": 1.0,
+        "_origin": "ast"
+      },
+      "reason": "Anonymous worker at L617 incorrectly targets disconnect's worker at L1500",
+      "citations": [
+        "worker",
+        "worker-other"
+      ]
+    }
+  ],
+  "source_reviewed_edges": [
+    {
+      "source": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_reconnect",
+      "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main/java/com/myjavaworld/jftp/FTPSession.java",
+      "source_location": "L703",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_main_java_com_myjavaworld_jftp_favoritesdlg_favoritesdlg_connectbuttonpressed",
+      "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/main/java/com/myjavaworld/jftp/FavoritesDlg.java",
+      "source_location": "L249",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_main_java_com_myjavaworld_jftp_actions_connectaction_connectaction_actionperformed",
+      "target": "src_main_java_com_myjavaworld_jftp_ftpsession_ftpsession_connect",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/main/java/com/myjavaworld/jftp/actions/ConnectAction.java",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "notes": [
+    "EXTRACTED is an extraction label, not proof that Java receiver resolution is correct",
+    "Coverage includes file nodes for package-info.java; these have no extracted symbols",
+    "No application behavior or offline socket-denial test was run"
+  ]
+}

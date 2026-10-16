@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "original-initial-context",
+  "role": "immutable original reference set at policy adoption",
+  "archived_utc": "2026-10-15T15:06:03.622850+00:00",
+  "adoption_head": "efa2596e7a0522ba0cc9d2439b7702e30a0b5524",
+  "generated_now": false,
+  "pristine_upstream": false,
+  "recorded_generation_base": "cdc95025ac74098f129bfd9cdcd613fa6348c8d0",
+  "source_state_notes": [
+    "Existing outputs were generated from a dirty working tree including earlier startup changes; the original generation metadata is preserved verbatim.",
+    "RepoMap and graph include 189 Java files; Repomix includes 182 Java files in its selected tracked-text scope.",
+    "The generation base commit alone does not identify the analysed working-tree bytes. Use archived source hashes and mapper inventories.",
+    "Historical internal filenames/paths describe original locations; resolve archived copies through files[].snapshot_path."
+  ],
+  "original_snapshot_id": null,
+  "parent_snapshot_id": null,
+  "files": [
+    {
+      "original_path": "docs/repo-maps/jftp.overview.python.md",
+      "snapshot_path": "repo-maps/jftp.overview.python.md",
+      "bytes": 67140,
+      "sha256": "c3fab6a1cf5814c07f7e32e15a945f2131a911ac676ddb8a610289d15941f95b"
+    },
+    {
+      "original_path": "docs/repo-maps/jftp.definitions.python.md",
+      "snapshot_path": "repo-maps/jftp.definitions.python.md",
+      "bytes": 101312,
+      "sha256": "842ebdb3cfdf1161ac6cda041a0d15e5a6e87d7d76c651ef6978d223322cc9b1"
+    },
+    {
+      "original_path": "docs/RepoMix/jftp.full-no-comments.xml",
+      "snapshot_path": "RepoMix/jftp.full-no-comments.xml",
+      "bytes": 1172053,
+      "sha256": "09716675ece1ca18ffa153dd5a85ca89c184cf4442332bad729e9e95c16c461d"
+    },
+    {
+      "original_path": "docs/RepoMix/jftp.compressed-no-comments.xml",
+      "snapshot_path": "RepoMix/jftp.compressed-no-comments.xml",
+      "bytes": 879049,
+      "sha256": "57a94b743aeed081828d7a8e3574a127836af112d0c19a5d0ee77d9fdd56c73d"
+    },
+    {
+      "original_path": "docs/RepoMix/provenance.json",
+      "snapshot_path": "RepoMix/provenance.json",
+      "bytes": 210255,
+      "sha256": "4997387a98176897410ec91b568bd2ab398340d978863d0b67001870bef050b6"
+    },
+    {
+      "original_path": "docs/RepoMix/compression-comparison.json",
+      "snapshot_path": "RepoMix/compression-comparison.json",
+      "bytes": 292457,
+      "sha256": "248cd7a98996e525140f1260310650d58e161687bbb74c1246ef39feae8e7686"
+    },
+    {
+      "original_path": "docs/code-graph/jftp.graph.json",
+      "snapshot_path": "code-graph/jftp.graph.json",
+      "bytes": 3301974,
+      "sha256": "ba44405cc5e8ad253eda29b036f50f592e279c52f69746aa04310913dee99380"
+    },
+    {
+      "original_path": "docs/code-graph/provenance.json",
+      "snapshot_path": "code-graph/provenance.json",
+      "bytes": 27002,
+      "sha256": "1da0534a279f8ad4ac4cebd8ce5f364492994de64a996d4f7abd0828f17002a9"
+    },
+    {
+      "original_path": "docs/code-graph/evidence.json",
+      "snapshot_path": "code-graph/evidence.json",
+      "bytes": 11472,
+      "sha256": "58107bdf609a70c42dc1eb9398b854209a452d141c3085a5becd4d3f571e929d"
+    },
+    {
+      "original_path": "docs/code-graph/validation.json",
+      "snapshot_path": "code-graph/validation.json",
+      "bytes": 5683,
+      "sha256": "ed199bae900979e3adf5dd8bdfdc81f6078b7cd7a0f8c3658c4f873d1fd43a5c"
+    },
+    {
+      "original_path": "docs/repo-maps/artifacts/jftp.overview.python/jftp.overview.python.meta.json",
+      "snapshot_path": "repo-maps/evidence/jftp.overview.python.meta.json",
+      "bytes": 37458,
+      "sha256": "12925744e61f5fa52393c7e56fdd24ef41246179570276844321485b9c6fd977"
+    },
+    {
+      "original_path": "docs/repo-maps/artifacts/jftp.overview.python/jftp.overview.python.inventory.json",
+      "snapshot_path": "repo-maps/evidence/jftp.overview.python.inventory.json",
+      "bytes": 122503,
+      "sha256": "6ef584edb977cb05c8a8a363cc6c2ecb82a1fc51cc93f3da2e284f310afb835f"
+    },
+    {
+      "original_path": "docs/repo-maps/artifacts/jftp.overview.python/jftp.overview.python.raw.md",
+      "snapshot_path": "repo-maps/evidence/jftp.overview.python.raw.md",
+      "bytes": 65535,
+      "sha256": "ad6ccfa6f461ee139e88d3ee2168a0ef8e5211b6400a12f66b6c9ef538f03c45"
+    },
+    {
+      "original_path": "docs/repo-maps/artifacts/jftp.definitions.python/jftp.definitions.python.meta.json",
+      "snapshot_path": "repo-maps/evidence/jftp.definitions.python.meta.json",
+      "bytes": 37470,
+      "sha256": "72641b181c859fe1115972f30210b6a67cf53756059aa55f1ee45e7368fe5496"
+    },
+    {
+      "original_path": "docs/repo-maps/artifacts/jftp.definitions.python/jftp.definitions.python.inventory.json",
+      "snapshot_path": "repo-maps/evidence/jftp.definitions.python.inventory.json",
+      "bytes": 122503,
+      "sha256": "6ef584edb977cb05c8a8a363cc6c2ecb82a1fc51cc93f3da2e284f310afb835f"
+    },
+    {
+      "original_path": "docs/repo-maps/artifacts/jftp.definitions.python/jftp.definitions.python.raw.md",
+      "snapshot_path": "repo-maps/evidence/jftp.definitions.python.raw.md",
+      "bytes": 99668,
+      "sha256": "2250d4318bbac79693cce68873c162ab51db54f4d8bf5bce54f3c0af55b816a9"
+    }
+  ],
+  "products": {
+    "repo-map": {
+      "provenance": "RepoMix/provenance.json",
+      "evidence": "repo-maps/evidence/",
+      "parsed_java_files": 189
+    },
+    "repomix": {
+      "provenance": "RepoMix/provenance.json",
+      "selected_files": 466
+    },
+    "code-graph": {
+      "provenance": "code-graph/provenance.json",
+      "java_files": 189,
+      "source_tracked_diff_at_generation": [
+        "pom.xml"
+      ]
+    }
+  }
+}
